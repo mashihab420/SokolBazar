@@ -1,31 +1,50 @@
-package com.example.sokolbazar;
+package com.example.sokolbazar.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sokolbazar.R;
 import com.example.sokolbazar.databinding.ActivityMainBinding;
+import com.example.sokolbazar.fragment.FragmentHome;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener , View.OnClickListener {
     private static String TAG="MainActivity";
     private ActivityMainBinding binding;
     FragmentHome fragmentHome;
+    int valu =0;
+    Toolbar toolbarr;
+    TextView toolbarTitle,cartQuantity;
+
     private ActionBarDrawerToggle actionBarDrawerToggle;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding=ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        toolbarr=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbarr);
+
+        cartQuantity = findViewById(R.id.cart_quantity_id);
+        toolbarTitle=findViewById(R.id.toolbarTitle);
+        toolbarTitle.setText("");
+
+
 
         setSupportActionBar(binding.include.toolbar);
 
@@ -49,6 +68,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         binding.setting.setOnClickListener(this);
 
         initFragmentHome();
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+       getMenuInflater().inflate(R.menu.menu_cart,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Log.d(TAG, "onOptionsItemSelected: called");
+        if(item.getItemId()==R.id.cartmenuid){
+           // Toast.makeText(this, "Q & A", Toast.LENGTH_SHORT).show();
+            valu++;
+            if (valu>0){
+                cartQuantity.setVisibility(View.VISIBLE);
+            }
+
+            cartQuantity.setText(""+valu);
+
+            if (valu>10){
+                cartQuantity.setText("10+");
+            }
+            Toast.makeText(this, ""+valu, Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void initFragmentHome(){
