@@ -4,61 +4,44 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Employee {
-
+    @SerializedName("albumId")
+    @Expose
+    private Integer albumId;
     @SerializedName("id")
     @Expose
-    private String id;
-    @SerializedName("first_name")
+    private Integer id;
+    @SerializedName("title")
     @Expose
-    private String firstName;
-    @SerializedName("last_name")
-    @Expose
-    private String lastName;
-    @SerializedName("email")
-    @Expose
-    private String email;
+    private String title;
     @SerializedName("url")
     @Expose
     private String url;
-
-    @SerializedName("message")
+    @SerializedName("thumbnailUrl")
     @Expose
-    private String message;
+    private String thumbnailUrl;
 
-    public String getMessage() {
-        return message;
+    public Integer getAlbumId() {
+        return albumId;
     }
 
-    public String getId() {
+    public void setAlbumId(Integer albumId) {
+        this.albumId = albumId;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getTitle() {
+        return title;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getUrl() {
@@ -69,12 +52,11 @@ public class Employee {
         this.url = url;
     }
 
-    public Employee(String id, String firstName, String lastName, String email, String url) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.url = url;
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
     }
 
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
+    }
 }

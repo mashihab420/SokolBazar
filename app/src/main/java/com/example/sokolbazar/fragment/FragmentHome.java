@@ -65,10 +65,10 @@ public class FragmentHome extends Fragment {
     }
 
     private void dataret(){
-        viewModelHome.getCategories().observe(this, new Observer<List<Employee>>() {
+        viewModelHome.getCategories().observe(this, new Observer<List<Employee>>() {  //problem 2
             @Override
             public void onChanged(List<Employee> employees) {
-               // Log.d("FragmentHome","Data: "+allEmployee.get(0).getEmail());
+                Log.d("FragmentHome","Data: "+allEmployee.get(1).getTitle());  //problem 1
 
             }
         });

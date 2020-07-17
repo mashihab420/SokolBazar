@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
     private static Retrofit retrofit;
-    private static final String baseURL = "https://12032020.000webhostapp.com/employee_details/";
+    private static final String baseURL = "https://jsonplaceholder.typicode.com/";
     private static ApiInterface apiInterface;
 
     public static synchronized ApiInterface getApiInterface(){
