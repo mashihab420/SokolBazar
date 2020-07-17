@@ -68,7 +68,7 @@ public class FragmentHome extends Fragment {
         viewModelHome.getCategories().observe(this, new Observer<List<Employee>>() {
             @Override
             public void onChanged(List<Employee> employees) {
-                Log.d("FragmentHome","Data: "+allEmployee.get(0).getEmail());
+               // Log.d("FragmentHome","Data: "+allEmployee.get(0).getEmail());
 
             }
         });
