@@ -49,29 +49,28 @@ public class FragmentHome extends Fragment {
         initViewModel();
 
         category_list = new ArrayList<>();
-
         // Categories Adapter initialization
         categoriesAdapter = new CategoriesAdapter(category_list, getContext());
         initRecyclerView(categoriesAdapter, binding.recyclerCategoryItem);
 
        // dataRetriever();
+        allEmployee=new ArrayList<>();
         dataret();
        return view;
-
-
-
-
 
     }
 
     private void dataret(){
-        viewModelHome.getCategories().observe(this, new Observer<List<Employee>>() {  //problem 2
+        viewModelHome.getCategories().observe(getActivity(), new Observer<List<Employee>>() { //todo this was changed with getActivity()
             @Override
             public void onChanged(List<Employee> employees) {
-                Log.d("FragmentHome","Data: "+allEmployee.get(1).getTitle());  //problem 1
-
+                  allEmployee.addAll(employees);
+                Log.d("errordipu", "onChanged: "+allEmployee.get(0).getTitle());
             }
         });
+
+
+
     }
 
    /* //get All Data for HomeFragment

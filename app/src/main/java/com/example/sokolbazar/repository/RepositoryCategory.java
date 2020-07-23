@@ -33,20 +33,21 @@ public class RepositoryCategory {
                 .subscribe(new Consumer<List<Employee>>() {
                                @Override
                                public void accept(List<Employee> employees) throws Exception {
-
-                                   if (employees !=null)
+                                   Log.d("errordipu", "accept: paisi size="+employees.size());
+                                   /*if (employees !=null)
                                    {
                                        response.postValue(employees);
                                    }else
                                    {
                                        response.postValue(null);
-                                   }
+                                   }*/
+                                   response.postValue(employees);
 
                                }
                            }, new Consumer<Throwable>() {
                                @Override
                                public void accept(Throwable throwable) throws Exception {
-                                   Log.d("Repositorycat","Error: "+throwable.getMessage());
+                                   Log.d("errordipu","Error: "+throwable.getMessage());
                                }
                            });
         return response;
