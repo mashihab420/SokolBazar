@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.sokolbazar.model.Employee;
+import com.example.sokolbazar.model.ModelProducts;
 import com.example.sokolbazar.retrofit.ApiInterface;
 import com.example.sokolbazar.model.ModelCategory;
 import com.example.sokolbazar.retrofit.ApiClient;
@@ -25,15 +26,15 @@ public class RepositoryCategory {
         apiReqest = ApiClient.getApiInterface();
     }
 
-    public LiveData<List<Employee>> getCategories(){
-        final MutableLiveData<List<Employee>> response = new MutableLiveData<>();
+    public LiveData<List<ModelProducts>> getCategories(){
+        final MutableLiveData<List<ModelProducts>> response = new MutableLiveData<>();
         apiReqest.getCategories()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<Employee>>() {
+                .subscribe(new Consumer<List<ModelProducts>>() {
                                @Override
-                               public void accept(List<Employee> employees) throws Exception {
-                                   Log.d("errordipu", "accept: paisi size="+employees.size());
+                               public void accept(List<ModelProducts> products) throws Exception {
+                                   Log.d("errordipu", "accept: paisi size="+products.size());
                                    /*if (employees !=null)
                                    {
                                        response.postValue(employees);
@@ -41,7 +42,7 @@ public class RepositoryCategory {
                                    {
                                        response.postValue(null);
                                    }*/
-                                   response.postValue(employees);
+                                   response.postValue(products);
 
                                }
                            }, new Consumer<Throwable>() {

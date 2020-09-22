@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import com.example.sokolbazar.R;
 import com.example.sokolbazar.databinding.ActivityMainBinding;
 import com.example.sokolbazar.fragment.FragmentHome;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener , View.OnClickListener {
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     TextView toolbarTitle,cartQuantity;
 
     private ActionBarDrawerToggle actionBarDrawerToggle;
+    
+  
 
 
     @Override
@@ -68,6 +72,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         binding.setting.setOnClickListener(this);
 
         initFragmentHome();
+        
+
+        
+       
     }
 
 
@@ -81,8 +89,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         Log.d(TAG, "onOptionsItemSelected: called");
         if(item.getItemId()==R.id.cartmenuid){
-           // Toast.makeText(this, "Q & A", Toast.LENGTH_SHORT).show();
-            valu++;
+
+          /*  valu++;
             if (valu>0){
                 cartQuantity.setVisibility(View.VISIBLE);
             }
@@ -92,7 +100,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (valu>10){
                 cartQuantity.setText("10+");
             }
-            Toast.makeText(this, ""+valu, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, ""+valu, Toast.LENGTH_SHORT).show();*/
+            Intent intent = new Intent(MainActivity.this, CartActivity.class);
+            startActivity(intent);
+
         }
         return super.onOptionsItemSelected(item);
     }

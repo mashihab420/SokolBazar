@@ -1,24 +1,29 @@
 package com.example.sokolbazar.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.sokolbazar.R;
-import com.example.sokolbazar.model.ModelCategory;
+import com.example.sokolbazar.activity.CategoryActivity;
+import com.example.sokolbazar.model.ModelProducts;
 
 import java.util.List;
 
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.VH> {
-    private List<ModelCategory> categories;
+    private List<ModelProducts> categories;
     Context context;
 
-    public CategoriesAdapter(List<ModelCategory> categories, Context context) {
+    public CategoriesAdapter(List<ModelProducts> categories, Context context) {
         this.categories = categories;
         this.context = context;
     }
@@ -34,7 +39,27 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.VH
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
 
-        holder.category_name.setText(categories.get(position).getName());
+        holder.category_name.setText(categories.get(position).getCategory());
+
+        String imageurl = "http://shihab.techdevbd.com/sokol_bazar/file_upload_api/"+categories.get(position).getImageUrl();
+        Glide
+                .with(context)
+                .load(imageurl)
+                .centerCrop()
+                .into(holder.bgImage);
+
+        holder.category_name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(context, CategoryActivity.class);
+                intent.putExtra("category",categories.get(position).getCategory());
+                context.startActivity(intent);
+
+
+            }
+        });
+
 
     }
 
@@ -45,9 +70,11 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.VH
 
     public class VH extends RecyclerView.ViewHolder {
         public TextView category_name;
+        public ImageView bgImage;
         public VH(@NonNull View itemView) {
             super(itemView);
             category_name=itemView.findViewById(R.id.titleid);
+            bgImage=itemView.findViewById(R.id.bg_image_id);
         }
     }
 }
