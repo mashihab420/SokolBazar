@@ -15,6 +15,10 @@ public class ModelCartRoom {
     String url;
     String c_logo;
 
+    public ModelCartRoom (){
+
+    }
+
     public ModelCartRoom(String p_name, String p_price, String quantity,String offers, String url, String c_logo) {
         this.p_name = p_name;
         this.p_price = p_price;

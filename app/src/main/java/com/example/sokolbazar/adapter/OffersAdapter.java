@@ -14,7 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.sokolbazar.R;
 import com.example.sokolbazar.model.Employee;
+import com.example.sokolbazar.model.ModelCartRoom;
 import com.example.sokolbazar.model.ModelProducts;
+import com.example.sokolbazar.repository.CartRepository;
 
 import java.util.List;
 
@@ -59,6 +61,25 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.MyViewHold
                 Toast.makeText(context, offers.get(position).getId()+" Item Added", Toast.LENGTH_SHORT).show();
             }
         });
+
+        holder.addicon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final CartRepository repository = new CartRepository(context);
+                String name = offers.get(position).getPName();
+                String price = offers.get(position).getPPrice();
+                String url = "http://shihab.techdevbd.com/sokol_bazar/file_upload_api/"+offers.get(position).getImageUrl();
+                String quantity = "2";
+                String offers = "20";
+                String logo = "https://1.bp.blogspot.com/-gPzD0tXqouo/VgE-dFZxK_I/AAAAAAAACsM/GdnTiZ5ie-w/s1600/agora_658147643.jpg";
+
+                repository.insertSingleData(new ModelCartRoom(name,price,quantity,offers,url,logo));
+
+
+            }
+        });
+
     }
 
     @Override

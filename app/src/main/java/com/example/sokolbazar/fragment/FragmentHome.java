@@ -115,7 +115,7 @@ binding.fabId.setOnClickListener(new View.OnClickListener() {
         if (popup == true){
             mScannerView.setResultHandler(FragmentHome.this);
             mScannerView.startCamera();
-            Toast.makeText(getActivity(), ""+s1, Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(getActivity(), ""+s1, Toast.LENGTH_SHORT).show();
             binding.moveLayoutId.setTranslationY(800);
             popup = false;
         }
@@ -149,10 +149,7 @@ binding.fabId.setOnClickListener(new View.OnClickListener() {
         allProductAdapter = new AllProductAdapter(products, getContext());
         initRecyclerViewAllproduct(allProductAdapter, binding.recyclerAllItem);
 
-        //get all product
-       /* allProduct = new ArrayList<>();
-        allProductAdapter = new AllProductAdapter(allProduct, getContext());
-        initRecyclerViewAllproduct(allProductAdapter, binding.recyclerAllItem);*/
+
 
        return view;
 
@@ -297,22 +294,18 @@ binding.fabId.setOnClickListener(new View.OnClickListener() {
 
         String[]  array = s1.split(",");
 
-    //   name.setText(array[0]);
-    //    price.setText(array[1]);
-       // pcode.setText(array[2]);
 
-       // arrayList.add(new ModelCart(array[0],array[1],array[2]));
+        final CartRepository repository = new CartRepository(getContext());
 
-        final CartRepository repository = new CartRepository(context);
+        String name = array[0];
+        String price = array[1];
+        String quantity = array[2];
+        String offers = array[3];
+        String url = array[4];
+        String logo = array[5];
 
-        String url = "http://shihab.techdevbd.com/sokol_bazar/file_upload_api/image_upload0158042_blender-juicer-grinder_450.jpeg";
-        String quantity = "2";
-        String logo = "https://1.bp.blogspot.com/-gPzD0tXqouo/VgE-dFZxK_I/AAAAAAAACsM/GdnTiZ5ie-w/s1600/agora_658147643.jpg";
-        String offers = "0";
+        repository.insertSingleData(new ModelCartRoom(name,price,quantity,offers,url,logo));
 
-        repository.insertSingleData(new ModelCartRoom(array[0],array[1],array[2],offers,url,logo));
-
-       // Toast.makeText(getContext(), "Product add to cart", Toast.LENGTH_SHORT).show();
 
 
         if(!s1.equals("")){

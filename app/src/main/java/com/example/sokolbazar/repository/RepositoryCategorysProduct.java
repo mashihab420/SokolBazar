@@ -27,7 +27,7 @@ public class RepositoryCategorysProduct {
 
     public LiveData<ModelProducts> getcategoryproduct(ModelProducts catname) {
         final MutableLiveData<ModelProducts> response = new MutableLiveData<>();
-        apiReqest.login(catname)
+        apiReqest.getCategoryProduct(catname)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(result -> {

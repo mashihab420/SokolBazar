@@ -9,6 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+       android:id="@+id/productlayoutId"
         android:layout_height="wrap_content"
         android:background="#FD47FBE6">
 
@@ -30,6 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:id="@+id/delete_fromCart"
             android:layout_marginEnd="8dp"
             android:src="@drawable/ic_close"
             app:layout_constraintEnd_toEndOf="parent"
@@ -89,7 +91,7 @@
             app:layout_constraintTop_toBottomOf="@+id/title_name_id" />
 
         <TextView
-            android:id="@+id/textView18"
+            android:id="@+id/plusebtid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="12dp"
@@ -99,7 +101,7 @@
             app:layout_constraintTop_toTopOf="@+id/imageView5" />
 
         <TextView
-            android:id="@+id/textView19"
+            android:id="@+id/minusbtid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
@@ -110,14 +112,15 @@
             app:layout_constraintTop_toTopOf="@+id/imageView5" />
 
         <TextView
-            android:layout_width="7dp"
-            android:layout_height="16dp"
-            android:text="1"
             android:id="@+id/cart_quantity_id"
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:layout_marginBottom="3dp"
             android:fontFamily="@font/montserrat"
+            android:text="1"
             app:layout_constraintBottom_toBottomOf="@+id/imageView5"
-            app:layout_constraintEnd_toStartOf="@+id/textView18"
-            app:layout_constraintStart_toEndOf="@+id/textView19"
+            app:layout_constraintEnd_toStartOf="@+id/plusebtid"
+            app:layout_constraintStart_toEndOf="@+id/minusbtid"
             app:layout_constraintTop_toBottomOf="@+id/price_product_id" />
 
 

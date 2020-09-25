@@ -20,12 +20,12 @@ public interface RoomDao {
     void insertSingleData(ModelCartRoom cartdb);
 
     @Update
-    void updateSingleDAta(ModelCartRoom cartdb);
+    void updateSingleData(ModelCartRoom cartdb);
 
     @Delete
     void DeleteSingleData(ModelCartRoom cartdb);
 
-    @Query("SELECT *FROM cartitem")
+    @Query("SELECT * FROM cartitem")
     LiveData<List<ModelCartRoom>> getAllData();
 
 

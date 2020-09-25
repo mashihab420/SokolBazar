@@ -54,7 +54,7 @@ public class ViewModelHome extends AndroidViewModel {
         return repositoryAllProduct.getProducts();
     }
 
-    public LiveData<ModelProducts> getLoginResponse(ModelProducts products) {
+    public LiveData<ModelProducts> getcategoryproducts(ModelProducts products) {
         return repositoryCategorysProduct.getcategoryproduct(products);
     }
 

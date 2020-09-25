@@ -25,6 +25,6 @@ public interface ApiInterface {
     Observable<List<ModelProducts>> getOffers();
 
     @POST("get_categoryproduct.php")
-    Observable<ModelProducts> login(@Body ModelProducts user);
+    Observable<ModelProducts> getCategoryProduct(@Body ModelProducts user);
 
 }
