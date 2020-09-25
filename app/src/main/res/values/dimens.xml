@@ -11,5 +11,6 @@
     <dimen name="nav_item_top_margin">16dp</dimen>
     <dimen name="nav_item_text_size">28sp</dimen>
     <dimen name="nav_item_text_size_32">32sp</dimen>
+    <dimen name="normal_text_size">20sp</dimen>
 
 </resources>

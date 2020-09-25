@@ -1,6 +1,7 @@
 package com.example.sokolbazar.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.sokolbazar.R;
+import com.example.sokolbazar.activity.ProductDetails;
 import com.example.sokolbazar.fragment.FragmentHome;
 import com.example.sokolbazar.model.Employee;
 import com.example.sokolbazar.model.ModelCartRoom;
@@ -70,6 +72,25 @@ public class AllProductAdapter extends RecyclerView.Adapter<AllProductAdapter.My
                 repository.insertSingleData(new ModelCartRoom(name,price,quantity,offers,url,logo));
 
 
+            }
+        });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = allproduct.get(position).getPName();
+                String price = allproduct.get(position).getPPrice();
+                String url = "http://shihab.techdevbd.com/sokol_bazar/file_upload_api/"+allproduct.get(position).getImageUrl();
+                String quantity = "1";
+                String offers = "20";
+
+                Intent intent = new Intent(context, ProductDetails.class);
+                intent.putExtra("pname",name);
+                intent.putExtra("pprice",price);
+                intent.putExtra("quantity",quantity);
+                // intent.putExtra("description",description);
+                intent.putExtra("url",url);
+                context.startActivity(intent);
             }
         });
 
