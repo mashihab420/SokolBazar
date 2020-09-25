@@ -9,6 +9,8 @@ import android.view.View;
 import com.bumptech.glide.Glide;
 import com.example.sokolbazar.R;
 import com.example.sokolbazar.databinding.ActivityProductDetailsBinding;
+import com.example.sokolbazar.model.ModelCartRoom;
+import com.example.sokolbazar.repository.CartRepository;
 
 public class ProductDetails extends AppCompatActivity {
 
@@ -78,6 +80,21 @@ public class ProductDetails extends AppCompatActivity {
 
                     binding.pquantitysd.setText(""+quantitys);
                 }
+            }
+        });
+
+        binding.addtocartid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final CartRepository repository = new CartRepository(getApplication());
+
+
+
+                String quantity = binding.pquantitysd.getText().toString();
+                String offers = "20";
+                String logo = "https://1.bp.blogspot.com/-gPzD0tXqouo/VgE-dFZxK_I/AAAAAAAACsM/GdnTiZ5ie-w/s1600/agora_658147643.jpg";
+
+                repository.insertSingleData(new ModelCartRoom(name,price,quantity,offers,urll,logo));
             }
         });
 
