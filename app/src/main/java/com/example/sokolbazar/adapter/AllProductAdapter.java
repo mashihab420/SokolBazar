@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,8 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.sokolbazar.R;
 import com.example.sokolbazar.activity.ProductDetails;
-import com.example.sokolbazar.fragment.FragmentHome;
-import com.example.sokolbazar.model.Employee;
 import com.example.sokolbazar.model.ModelCartRoom;
 import com.example.sokolbazar.model.ModelProducts;
 import com.example.sokolbazar.repository.CartRepository;
@@ -64,12 +61,10 @@ public class AllProductAdapter extends RecyclerView.Adapter<AllProductAdapter.My
                 String price = allproduct.get(position).getPPrice();
                 String url = "http://shihab.techdevbd.com/sokol_bazar/file_upload_api/"+allproduct.get(position).getImageUrl();
                 String quantity = "1";
-                String offers = "0";
-                   String logo = "https://1.bp.blogspot.com/-gPzD0tXqouo/VgE-dFZxK_I/AAAAAAAACsM/GdnTiZ5ie-w/s1600/agora_658147643.jpg";
+                String offer = allproduct.get(position).getOffers();
+                String shopname = allproduct.get(position).getShopName();
 
-
-
-                repository.insertSingleData(new ModelCartRoom(name,price,quantity,offers,url,logo));
+                repository.insertSingleData(new ModelCartRoom(name,price,quantity,offer,url,shopname));
 
 
             }
@@ -82,14 +77,20 @@ public class AllProductAdapter extends RecyclerView.Adapter<AllProductAdapter.My
                 String price = allproduct.get(position).getPPrice();
                 String url = "http://shihab.techdevbd.com/sokol_bazar/file_upload_api/"+allproduct.get(position).getImageUrl();
                 String quantity = "1";
-                String offers = "20";
+
+                String description = allproduct.get(position).getDescription();
+                String offer = allproduct.get(position).getOffers();
+                String shopname = allproduct.get(position).getShopName();
 
                 Intent intent = new Intent(context, ProductDetails.class);
                 intent.putExtra("pname",name);
                 intent.putExtra("pprice",price);
                 intent.putExtra("quantity",quantity);
-                // intent.putExtra("description",description);
+                intent.putExtra("description",description);
+                intent.putExtra("offers",offer);
+                intent.putExtra("shopname",shopname);
                 intent.putExtra("url",url);
+
                 context.startActivity(intent);
             }
         });

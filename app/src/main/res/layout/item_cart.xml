@@ -51,8 +51,6 @@
             android:id="@+id/offer_id"
             android:layout_width="60dp"
             android:layout_height="54dp"
-            android:src="@drawable/offer20"
-            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/product_image_id"
             app:layout_constraintEnd_toEndOf="@+id/product_image_id" />
 

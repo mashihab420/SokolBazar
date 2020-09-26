@@ -6,12 +6,9 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.sokolbazar.model.Employee;
 import com.example.sokolbazar.model.ModelProducts;
 import com.example.sokolbazar.retrofit.ApiInterface;
-import com.example.sokolbazar.model.ModelCategory;
 import com.example.sokolbazar.retrofit.ApiClient;
-import com.orhanobut.logger.LogAdapter;
 
 import java.util.List;
 

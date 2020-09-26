@@ -1,7 +1,6 @@
 package com.example.sokolbazar.retrofit;
 
 
-import com.example.sokolbazar.model.Employee;
 import com.example.sokolbazar.model.ModelProducts;
 
 import java.util.List;

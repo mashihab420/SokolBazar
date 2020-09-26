@@ -98,7 +98,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/shoplogo"
             android:layout_width="49dp"
             android:layout_height="43dp"
             app:layout_constraintBottom_toBottomOf="@+id/offer_image"

@@ -25,6 +25,16 @@ public class ModelProducts {
     @Expose
     private String category;
 
+    @SerializedName("p_description")
+    @Expose
+    private String description;
+
+
+    @SerializedName("shop_name")
+    @Expose
+    private String shopName;
+
+
     public String getCategory() {
         return category;
     }
@@ -73,5 +83,19 @@ public class ModelProducts {
         this.imageUrl = imageUrl;
     }
 
+    public String getDescription() {
+        return description;
+    }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
+    }
 }

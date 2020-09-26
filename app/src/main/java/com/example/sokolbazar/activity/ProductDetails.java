@@ -26,8 +26,11 @@ public class ProductDetails extends AppCompatActivity {
         Intent intent = getIntent();
         String name = intent.getStringExtra("pname");
         String price = intent.getStringExtra("pprice");
+        String description = intent.getStringExtra("description");
         String quantity = intent.getStringExtra("quantity");
+        String offers = intent.getStringExtra("offers");
         String urll = intent.getStringExtra("url");
+        String shopname = intent.getStringExtra("shopname");
 
         Glide
                 .with(getApplicationContext())
@@ -37,6 +40,7 @@ public class ProductDetails extends AppCompatActivity {
 
         binding.productnamed.setText(name);
         binding.productpriced.setText(price);
+        binding.productdis.setText(description);
 
         binding.cartidd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,10 +95,11 @@ public class ProductDetails extends AppCompatActivity {
 
 
                 String quantity = binding.pquantitysd.getText().toString();
-                String offers = "20";
-                String logo = "https://1.bp.blogspot.com/-gPzD0tXqouo/VgE-dFZxK_I/AAAAAAAACsM/GdnTiZ5ie-w/s1600/agora_658147643.jpg";
+                String offers = intent.getStringExtra("offers");
+                String urll = intent.getStringExtra("url");
+                String shopname = intent.getStringExtra("shopname");
 
-                repository.insertSingleData(new ModelCartRoom(name,price,quantity,offers,urll,logo));
+                repository.insertSingleData(new ModelCartRoom(name,price,quantity,offers,urll,shopname));
                 Intent intent = new Intent(ProductDetails.this,CartActivity.class);
                 startActivity(intent);
             }

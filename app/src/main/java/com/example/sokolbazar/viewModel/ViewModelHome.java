@@ -6,8 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.sokolbazar.model.Employee;
-import com.example.sokolbazar.model.ModelCategory;
 import com.example.sokolbazar.model.ModelProducts;
 import com.example.sokolbazar.repository.RepositoryAllProduct;
 import com.example.sokolbazar.repository.RepositoryCategory;

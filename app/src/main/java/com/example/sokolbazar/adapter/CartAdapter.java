@@ -3,7 +3,6 @@ package com.example.sokolbazar.adapter;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -16,15 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.sokolbazar.R;
-import com.example.sokolbazar.activity.CartActivity;
 import com.example.sokolbazar.activity.OnDataSend;
-import com.example.sokolbazar.fragment.FragmentHome;
-import com.example.sokolbazar.model.Employee;
-import com.example.sokolbazar.model.ModelCart;
 import com.example.sokolbazar.model.ModelCartRoom;
 import com.example.sokolbazar.repository.CartRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> {
@@ -60,7 +54,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         holder.title.setText(cart.get(position).getP_name());
         holder.price.setText(cart.get(position).getP_price());
         holder.cart_quantity.setText(cart.get(position).getQuantity());
-
 
 
 
@@ -114,9 +107,89 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
         String offer = cart.get(position).getOffers();
 
-        if (offer.equals("20")){
-            holder.offerpercent.setVisibility(View.VISIBLE);
+       // Toast.makeText(context, ""+offer, Toast.LENGTH_SHORT).show();
+
+        if (offer.equals("5")){
+            Glide
+                    .with(context)
+                    .load(R.drawable.offer5)
+                    .centerCrop()
+                    .into(holder.offerpercent);
+
+
         }
+        if (offer.equals("10")){
+            Glide
+                    .with(context)
+                    .load(R.drawable.offer10)
+                    .centerCrop()
+                    .into(holder.offerpercent);
+        }
+
+        if (offer.equals("15")){
+            Glide
+                    .with(context)
+                    .load(R.drawable.offer15)
+                    .centerCrop()
+                    .into(holder.offerpercent);
+        }
+
+        if (offer.equals("20")){
+            Glide
+                    .with(context)
+                    .load(R.drawable.offer20)
+                    .centerCrop()
+                    .into(holder.offerpercent);
+        }
+
+        if (offer.equals("25")){
+            Glide
+                    .with(context)
+                    .load(R.drawable.offer25)
+                    .centerCrop()
+                    .into(holder.offerpercent);
+        }
+
+        if (offer.equals("30")){
+            Glide
+                    .with(context)
+                    .load(R.drawable.offer30)
+                    .centerCrop()
+                    .into(holder.offerpercent);
+        }
+
+        if (offer.equals("35")){
+            Glide
+                    .with(context)
+                    .load(R.drawable.offer35)
+                    .centerCrop()
+                    .into(holder.offerpercent);
+        }
+
+        if (offer.equals("40")){
+            Glide
+                    .with(context)
+                    .load(R.drawable.offer40)
+                    .centerCrop()
+                    .into(holder.offerpercent);
+        }
+
+        if (offer.equals("45")){
+            Glide
+                    .with(context)
+                    .load(R.drawable.offer45)
+                    .centerCrop()
+                    .into(holder.offerpercent);
+        }
+
+        if (offer.equals("50")){
+            Glide
+                    .with(context)
+                    .load(R.drawable.offer50)
+                    .centerCrop()
+                    .into(holder.offerpercent);
+        }
+
 
 
         Glide
@@ -125,13 +198,46 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                 .centerCrop()
                 .into(holder.productimage);
 
-        Glide
-                .with(context)
-                .load(R.drawable.swapno)
-                .centerCrop()
-                .into(holder.brandimage);
 
-        holder.productlayout.setBackgroundColor(Color.parseColor("#FE6268"));
+
+        String shopname = cart.get(position).getC_logo();
+
+
+
+       if (shopname.equals("shwapno")){
+            Glide
+                    .with(context)
+                    .load(R.drawable.swapno)
+                    .centerCrop()
+                    .into(holder.brandimage);
+            holder.productlayout.setBackgroundColor(Color.parseColor("#FE6268"));
+        }
+        if (shopname.equals("agora"))
+        {
+            Glide
+                    .with(context)
+                    .load(R.drawable.agora)
+                    .centerCrop()
+                    .into(holder.brandimage);
+            holder.productlayout.setBackgroundColor(Color.parseColor("#74F5D2"));
+        }
+
+        if (shopname.equals("aarong"))
+        {
+            Glide
+                    .with(context)
+                    .load(R.drawable.aarong)
+                    .centerCrop()
+                    .into(holder.brandimage);
+            holder.productlayout.setBackgroundColor(Color.parseColor("#FBA257"));
+        }
+
+        if (shopname.equals("")){
+            holder.productlayout.setBackgroundColor(Color.parseColor("#74F5D2"));
+        }
+
+
+
         
 
         holder.delete.setOnClickListener(new View.OnClickListener() {
@@ -162,7 +268,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
 
 
-        Toast.makeText(context, ""+total, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(context, ""+total, Toast.LENGTH_SHORT).show();
 
         dataSend.totalPrice(""+total);
 

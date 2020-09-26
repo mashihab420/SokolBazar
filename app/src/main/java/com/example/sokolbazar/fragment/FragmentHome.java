@@ -13,28 +13,21 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
-import com.example.sokolbazar.R;
 import com.example.sokolbazar.adapter.AllProductAdapter;
 import com.example.sokolbazar.adapter.CategoriesAdapter;
 import com.example.sokolbazar.adapter.OffersAdapter;
 import com.example.sokolbazar.databinding.FragmentHomeBinding;
-import com.example.sokolbazar.model.Employee;
 import com.example.sokolbazar.model.ModelCart;
 import com.example.sokolbazar.model.ModelCartRoom;
-import com.example.sokolbazar.model.ModelCategory;
 import com.example.sokolbazar.model.ModelProducts;
 import com.example.sokolbazar.repository.CartRepository;
 import com.example.sokolbazar.viewModel.ViewModelHome;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.zxing.Result;
 
@@ -74,7 +67,7 @@ public class FragmentHome extends Fragment implements ZXingScannerView.ResultHan
 
     List<ModelProducts> allOffer;
 
-    List<Employee> allProduct;
+
 
     Boolean popup = true;
 

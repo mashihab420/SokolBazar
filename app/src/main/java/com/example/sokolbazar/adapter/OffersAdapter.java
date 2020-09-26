@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.sokolbazar.R;
 import com.example.sokolbazar.activity.ProductDetails;
-import com.example.sokolbazar.model.Employee;
 import com.example.sokolbazar.model.ModelCartRoom;
 import com.example.sokolbazar.model.ModelProducts;
 import com.example.sokolbazar.repository.CartRepository;
@@ -73,11 +72,12 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.MyViewHold
                 String name = offers.get(position).getPName();
                 String price = offers.get(position).getPPrice();
                 String url = "http://shihab.techdevbd.com/sokol_bazar/file_upload_api/"+offers.get(position).getImageUrl();
+             //   String description = offers.get(position).getDescription();
                 String quantity = "1";
-                String offers = "20";
-                String logo = "https://1.bp.blogspot.com/-gPzD0tXqouo/VgE-dFZxK_I/AAAAAAAACsM/GdnTiZ5ie-w/s1600/agora_658147643.jpg";
+                String offer = offers.get(position).getOffers();
+                String shopname = offers.get(position).getShopName();
 
-                repository.insertSingleData(new ModelCartRoom(name,price,quantity,offers,url,logo));
+                repository.insertSingleData(new ModelCartRoom(name,price,quantity,offer,url,shopname));
 
 
             }
@@ -108,14 +108,20 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.MyViewHold
                 String price = offers.get(position).getPPrice();
                 String url = "http://shihab.techdevbd.com/sokol_bazar/file_upload_api/"+offers.get(position).getImageUrl();
                 String quantity = "1";
-                String offers = "20";
+                String description = offers.get(position).getDescription();
+                String offer = offers.get(position).getOffers();
+                String shopname = offers.get(position).getShopName();
+
 
                 Intent intent = new Intent(context, ProductDetails.class);
                 intent.putExtra("pname",name);
                 intent.putExtra("pprice",price);
                 intent.putExtra("quantity",quantity);
-                // intent.putExtra("description",description);
+                 intent.putExtra("description",description);
+                intent.putExtra("offers",offer);
                 intent.putExtra("url",url);
+                intent.putExtra("shopname",shopname);
+
                 context.startActivity(intent);
             }
         });
