@@ -65,6 +65,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         holder.minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //TODO ai minus hoya data room a update kora lagbe
+
                 if (quantitys==1){
                     holder.cart_quantity.setText("1");
                 }else
@@ -94,6 +97,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                 }*/
 
 
+                //TODO ai plus hoya data room a update kora lagbe
 
               /*  CartRepository repository = new CartRepository(context);
                 repository.UpdateSingleData(new ModelCartRoom(cart.get(position).getP_name(),
