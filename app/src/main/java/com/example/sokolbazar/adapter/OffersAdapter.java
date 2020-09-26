@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -72,7 +73,7 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.MyViewHold
                 String name = offers.get(position).getPName();
                 String price = offers.get(position).getPPrice();
                 String url = "http://shihab.techdevbd.com/sokol_bazar/file_upload_api/"+offers.get(position).getImageUrl();
-                String quantity = "2";
+                String quantity = "1";
                 String offers = "20";
                 String logo = "https://1.bp.blogspot.com/-gPzD0tXqouo/VgE-dFZxK_I/AAAAAAAACsM/GdnTiZ5ie-w/s1600/agora_658147643.jpg";
 
@@ -81,6 +82,24 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.MyViewHold
 
             }
         });
+
+
+       /* holder.addtocart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final CartRepository repository = new CartRepository(context);
+                String name = offers.get(position).getPName();
+                String price = offers.get(position).getPPrice();
+                String url = "http://shihab.techdevbd.com/sokol_bazar/file_upload_api/"+offers.get(position).getImageUrl();
+                String quantity = "1";
+                String offers = "20";
+                String logo = "https://1.bp.blogspot.com/-gPzD0tXqouo/VgE-dFZxK_I/AAAAAAAACsM/GdnTiZ5ie-w/s1600/agora_658147643.jpg";
+
+                repository.insertSingleData(new ModelCartRoom(name,price,quantity,offers,url,logo));
+            }
+        });*/
+       
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,12 +130,14 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.MyViewHold
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title,price;
         public ImageView bg_offer,addicon;
+        public Button addtocart;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.offer_Title_id);
             price = itemView.findViewById(R.id.offer_price_id);
             bg_offer = itemView.findViewById(R.id.offer_image);
             addicon = itemView.findViewById(R.id.add_item_id);
+          /* addtocart = itemView.findViewById(R.id.addtoCartButton);*/
 
         }
     }
