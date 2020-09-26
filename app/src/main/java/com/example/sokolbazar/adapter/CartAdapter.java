@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.sokolbazar.R;
 import com.example.sokolbazar.activity.CartActivity;
+import com.example.sokolbazar.activity.OnDataSend;
 import com.example.sokolbazar.fragment.FragmentHome;
 import com.example.sokolbazar.model.Employee;
 import com.example.sokolbazar.model.ModelCart;
@@ -31,6 +32,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
     List<ModelCartRoom> cart;
      Context context;
      CartRepository repository;
+     private OnDataSend dataSend;
 
      public int total = 0;
     int taka = 0;
@@ -38,10 +40,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
     int quantitys=1;
 
-    public CartAdapter(Context context, List<ModelCartRoom> cart, CartRepository repository) {
+    public CartAdapter(Context context, List<ModelCartRoom> cart, CartRepository repository,OnDataSend dataSend) {
         this.cart = cart;
         this.context = context;
         this.repository = repository;
+        this.dataSend = dataSend;
     }
 
     @NonNull
@@ -143,9 +146,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                     modelCartRoom.setId(cart.get(position).getId());
                     repository.delete(modelCartRoom);
                     cart.remove(cart.get(position).getId()-1);
-                    notifyDataSetChanged();
+
                     taka =0;
                     total =0;
+                    notifyDataSetChanged();
                 //    Toast.makeText(context, ""+cart.get(position).getId(), Toast.LENGTH_SHORT).show();
                 }catch (Exception e){
                    // Toast.makeText(context, ""+e, Toast.LENGTH_SHORT).show();
@@ -159,6 +163,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
 
         Toast.makeText(context, ""+total, Toast.LENGTH_SHORT).show();
+
+        dataSend.totalPrice(""+total);
+
+
 
     }
 

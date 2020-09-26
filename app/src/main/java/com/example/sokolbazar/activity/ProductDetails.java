@@ -95,6 +95,8 @@ public class ProductDetails extends AppCompatActivity {
                 String logo = "https://1.bp.blogspot.com/-gPzD0tXqouo/VgE-dFZxK_I/AAAAAAAACsM/GdnTiZ5ie-w/s1600/agora_658147643.jpg";
 
                 repository.insertSingleData(new ModelCartRoom(name,price,quantity,offers,urll,logo));
+                Intent intent = new Intent(ProductDetails.this,CartActivity.class);
+                startActivity(intent);
             }
         });
 

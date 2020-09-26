@@ -24,7 +24,7 @@ import com.example.sokolbazar.repository.CartRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CartActivity extends AppCompatActivity {
+public class CartActivity extends AppCompatActivity implements OnDataSend{
 
     ConstraintLayout constraintLayout;
     TextView address,subtotal;
@@ -54,7 +54,7 @@ public class CartActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
 
-        adapter = new CartAdapter(getApplicationContext(),arrayList,repository);
+        adapter = new CartAdapter(getApplicationContext(),arrayList,repository,this);
         recyclerView.setAdapter(adapter);
 
 
@@ -111,5 +111,8 @@ public class CartActivity extends AppCompatActivity {
     }
 
 
-
+    @Override
+    public void totalPrice(String value) {
+        subtotal.setText(value);
+    }
 }
