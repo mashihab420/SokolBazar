@@ -1,6 +1,7 @@
 package com.example.sokolbazar.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.sokolbazar.R;
+import com.example.sokolbazar.activity.CartActivity;
 import com.example.sokolbazar.activity.OnDataSend;
 import com.example.sokolbazar.model.ModelCartRoom;
 import com.example.sokolbazar.repository.CartRepository;

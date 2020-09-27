@@ -134,8 +134,8 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.MyViewHold
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title,price;
-        public ImageView bg_offer,addicon;
+        public TextView title,price,addicon;
+        public ImageView bg_offer;
         public Button addtocart;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);

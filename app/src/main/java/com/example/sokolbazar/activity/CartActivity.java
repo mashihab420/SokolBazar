@@ -27,7 +27,7 @@ import java.util.List;
 public class CartActivity extends AppCompatActivity implements OnDataSend{
 
     ConstraintLayout constraintLayout;
-    TextView address,subtotal;
+    TextView address,subtotal,total;
     ImageView emptyimage,backbutton;
     RecyclerView recyclerView;
     CartAdapter adapter;
@@ -47,6 +47,7 @@ public class CartActivity extends AppCompatActivity implements OnDataSend{
         emptyimage = findViewById(R.id.empty_cartimg);
         backbutton = findViewById(R.id.backicon);
         subtotal = findViewById(R.id.textView12);
+        total = findViewById(R.id.textView15);
 
         arrayList = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerView);
@@ -63,10 +64,11 @@ public class CartActivity extends AppCompatActivity implements OnDataSend{
         backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CartActivity.this, MainActivity.class);
+               /* Intent intent = new Intent(CartActivity.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
-                finish();
+                finish();*/
+               onBackPressed();
             }
         });
 
@@ -88,10 +90,11 @@ public class CartActivity extends AppCompatActivity implements OnDataSend{
                     emptyimage.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent = new Intent(CartActivity.this, MainActivity.class);
+                            /*Intent intent = new Intent(CartActivity.this, MainActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
-                            finish();
+                            finish();*/
+                            onBackPressed();
                         }
                     });
 
@@ -114,5 +117,20 @@ public class CartActivity extends AppCompatActivity implements OnDataSend{
     @Override
     public void totalPrice(String value) {
         subtotal.setText(value);
+        int subtotal = Integer.parseInt(value);
+
+       int totall = subtotal+50;
+
+       total.setText(""+totall);
+
+
     }
+
+    /*@Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(CartActivity.this,MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }*/
 }

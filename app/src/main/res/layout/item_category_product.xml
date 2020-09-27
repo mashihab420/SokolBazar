@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
+    android:background="#F4F4F4"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
+    android:layout_margin="20dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="165dp"
-        android:layout_height="210dp">
+        android:layout_width="175dp"
+        android:layout_height="230dp">
 
 
         <ImageView
@@ -22,58 +24,47 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/offer_price_id"
+            android:id="@+id/product_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="429 BDT"
-            android:textColor="@color/red"
-            android:textSize="10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/offer_image" />
-
-        <ImageView
-            android:id="@+id/add_item_id"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="8dp"
-            android:src="@drawable/ic_plus"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/offer_image" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:text="1"
-            app:layout_constraintEnd_toStartOf="@+id/add_item_id"
-            app:layout_constraintTop_toBottomOf="@+id/offer_image" />
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/ic_minus"
-            app:layout_constraintEnd_toStartOf="@+id/textView2"
-            app:layout_constraintTop_toBottomOf="@+id/offer_image" />
-
-        <TextView
-            android:id="@+id/offer_Title_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/montserrat"
-            android:text="Pureit Kit"
+            android:text="Pureit kit"
+            android:textColor="@color/black_material"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/offer_image" />
+
+
+        <TextView
+            android:id="@+id/add_item_id"
+            android:layout_width="40dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/colorAccent"
+            android:fontFamily="@font/montserrat"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="ADD"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/product_name" />
+
+
+        <TextView
+            android:id="@+id/p_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/montserrat"
+            android:text="700 BDT"
+            android:textColor="@color/red"
+            android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/offer_price_id" />
+            app:layout_constraintTop_toBottomOf="@+id/product_name" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

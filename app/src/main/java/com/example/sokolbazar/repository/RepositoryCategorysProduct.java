@@ -25,21 +25,23 @@ public class RepositoryCategorysProduct {
         apiReqest = ApiClient.getApiInterface();
     }
 
-    public LiveData<ModelProducts> getcategoryproduct(ModelProducts catname) {
-        final MutableLiveData<ModelProducts> response = new MutableLiveData<>();
-        apiReqest.getCategoryProduct(catname)
+    public LiveData<List<ModelProducts>> getcategoryproduct(ModelProducts modelProducts){
+
+        final MutableLiveData<List<ModelProducts>> response = new MutableLiveData<>();
+        apiReqest.getCategoryProduct(modelProducts)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(result -> {
-                            if (result!=null)
-                                response.postValue(result);
-                            else
-                                response.postValue(null); },
-                        t -> {
-                            response.postValue(null);
-                            Log.d("MyError", "login: "+t.getMessage());
-
-                        });
+                .subscribe(new Consumer<List<ModelProducts>>() {
+                               @Override
+                               public void accept(List<ModelProducts> products) throws Exception {
+                                   response.postValue(products);
+                               }
+                           }, new Consumer<Throwable>() {
+                               @Override
+                               public void accept(Throwable throwable) throws Exception {
+                                   Log.d(TAG,""+throwable.getMessage());
+                               }
+                           });
 
         return response;
     }

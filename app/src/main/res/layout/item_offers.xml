@@ -34,30 +34,30 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/offer_Title_id" />
 
-        <ImageView
-            android:id="@+id/add_item_id"
+       <!-- <ImageView
+            android:id="@+id/addtoCartButton"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="8dp"
             android:visibility="visible"
             android:src="@drawable/ic_plus"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/offer_Title_id" />
+            app:layout_constraintTop_toBottomOf="@+id/offer_Title_id" />-->
 
-      <!--  <TextView
+        <TextView
+            android:id="@+id/add_item_id"
             android:layout_width="40dp"
             android:layout_height="24dp"
             android:layout_marginTop="3dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:background="@color/colorAccent"
             android:fontFamily="@font/montserrat"
             android:gravity="center"
-            android:id="@+id/addtoCartButton"
             android:padding="2dp"
             android:text="ADD"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/offer_Title_id" />-->
+            app:layout_constraintTop_toBottomOf="@+id/offer_Title_id" />
 
         <TextView
             android:id="@+id/textView2"

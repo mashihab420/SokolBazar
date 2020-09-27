@@ -103,8 +103,8 @@ public class AllProductAdapter extends RecyclerView.Adapter<AllProductAdapter.My
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title,price;
-        public ImageView bg_offer,addicon;
+        public TextView title,price,addicon;
+        public ImageView bg_offer;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.offer_Title_id);

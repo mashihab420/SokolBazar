@@ -52,7 +52,7 @@ public class ViewModelHome extends AndroidViewModel {
         return repositoryAllProduct.getProducts();
     }
 
-    public LiveData<ModelProducts> getcategoryproducts(ModelProducts products) {
+    public LiveData<List<ModelProducts>> getcategoryproducts(ModelProducts products) {
         return repositoryCategorysProduct.getcategoryproduct(products);
     }
 
