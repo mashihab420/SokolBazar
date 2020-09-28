@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,8 +20,12 @@ import android.widget.Toast;
 import com.example.sokolbazar.R;
 import com.example.sokolbazar.databinding.ActivityMainBinding;
 import com.example.sokolbazar.fragment.FragmentHome;
+import com.example.sokolbazar.model.ModelCartRoom;
+import com.example.sokolbazar.repository.CartRepository;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener , View.OnClickListener {
     private static String TAG="MainActivity";
@@ -31,8 +36,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     TextView toolbarTitle,cartQuantity;
 
     private ActionBarDrawerToggle actionBarDrawerToggle;
-    
-  
+
+    CartRepository repository;
 
 
     @Override
@@ -72,10 +77,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         binding.setting.setOnClickListener(this);
 
         initFragmentHome();
-        
 
-        
-       
+
+        //for cart quantity calculation start
+
+        repository = new CartRepository(this);
+        repository.getAllData().observe(this, new Observer<List<ModelCartRoom>>() {
+            @Override
+            public void onChanged(List<ModelCartRoom> modelCartRooms) {
+
+                if (modelCartRooms.size()==0){
+                    cartQuantity.setVisibility(View.GONE);
+                }else {
+                    cartQuantity.setVisibility(View.VISIBLE);
+                    if(modelCartRooms.size()>99){
+                        cartQuantity.setText("99+");
+                    }else {
+                        cartQuantity.setText(""+modelCartRooms.size());
+                    }
+
+
+                }
+
+            }
+        });
+
+//for cart quantity calculation end
+
     }
 
 

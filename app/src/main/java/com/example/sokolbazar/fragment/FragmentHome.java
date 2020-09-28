@@ -8,17 +8,22 @@ import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
+import com.example.sokolbazar.R;
 import com.example.sokolbazar.adapter.AllProductAdapter;
 import com.example.sokolbazar.adapter.CategoriesAdapter;
 import com.example.sokolbazar.adapter.OffersAdapter;
@@ -34,7 +39,10 @@ import com.google.zxing.Result;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.observers.TestObserver;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
+
+import static android.content.Context.INPUT_METHOD_SERVICE;
 
 
 public class FragmentHome extends Fragment implements ZXingScannerView.ResultHandler {
@@ -46,14 +54,14 @@ public class FragmentHome extends Fragment implements ZXingScannerView.ResultHan
     private static final int WRITE_EXST = 1;
     private static final int REQUEST_PERMISSION = 123;
     int CAMERA;
-    String position,formt;
+    String position, formt;
     TextView swape;
     String s1;
     Context context;
-
+    TextView searchtextview;
 
     private ViewModelHome viewModelHome;
-  private FragmentHomeBinding binding;
+    private FragmentHomeBinding binding;
 
     private CategoriesAdapter categoriesAdapter;
     private OffersAdapter offersAdapter;
@@ -66,7 +74,7 @@ public class FragmentHome extends Fragment implements ZXingScannerView.ResultHan
     List<ModelProducts> products;
 
     List<ModelProducts> allOffer;
-
+    CartRepository repository;
 
 
     Boolean popup = true;
@@ -80,53 +88,53 @@ public class FragmentHome extends Fragment implements ZXingScannerView.ResultHan
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding=FragmentHomeBinding.inflate(inflater,container,false);
-        View view=binding.getRoot();
+        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
+
+        searchtextview = view.findViewById(R.id.editTextSearch);
         initViewModel();
 
 
-        if( ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(new String[]{Manifest.permission.CAMERA},5);
+                requestPermissions(new String[]{Manifest.permission.CAMERA}, 5);
             }
         }
 
-       // ViewGroup contentFrame = (ViewGroup) findViewById(R.id.content_frame);
+        // ViewGroup contentFrame = (ViewGroup) findViewById(R.id.content_frame);
         mScannerView = new ZXingScannerView(getContext());
         binding.contentFrame.addView(mScannerView);
 
 
-
         binding.moveLayoutId.setTranslationY(1750);
 
-binding.fabId.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
+        binding.fabId.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
 
+                if (popup == true) {
+                    binding.moveLayoutId.setVisibility(View.VISIBLE);
+                    mScannerView.setResultHandler(FragmentHome.this);
+                    mScannerView.startCamera();
+                    //  Toast.makeText(getActivity(), ""+s1, Toast.LENGTH_SHORT).show();
+                    binding.moveLayoutId.setTranslationY(800);
+                    popup = false;
+                } else if (popup == false) {
+                    mScannerView.stopCamera();
+                    binding.moveLayoutId.setVisibility(View.GONE);
+                    // Toast.makeText(getActivity(), "Camera Off", Toast.LENGTH_SHORT).show();
+                    binding.moveLayoutId.setTranslationY(1750);
+                    popup = true;
+                }
+            }
+        });
 
-        if (popup == true){
-            mScannerView.setResultHandler(FragmentHome.this);
-            mScannerView.startCamera();
-          //  Toast.makeText(getActivity(), ""+s1, Toast.LENGTH_SHORT).show();
-            binding.moveLayoutId.setTranslationY(800);
-            popup = false;
-        }
-        else if(popup == false){
-            mScannerView.stopCamera();
-           // Toast.makeText(getActivity(), "Camera Off", Toast.LENGTH_SHORT).show();
-            binding.moveLayoutId.setTranslationY(1750);
-            popup = true;
-        }
-    }
-});
 
-
-
-       // dataRetriever();
+        // dataRetriever();
 
         //get all category
-        allEmployee=new ArrayList<>();
+        allEmployee = new ArrayList<>();
 
         categoriesAdapter = new CategoriesAdapter(allEmployee, getContext());
         initRecyclerView(categoriesAdapter, binding.recyclerCategoryItem);
@@ -143,36 +151,98 @@ binding.fabId.setOnClickListener(new View.OnClickListener() {
         initRecyclerViewAllproduct(allProductAdapter, binding.recyclerAllItem);
 
 
+       /* searchtextview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "hide", Toast.LENGTH_SHORT).show();
+                binding.closesearchbr.setVisibility(View.VISIBLE);
+                binding.moveLayoutId.setVisibility(View.GONE);
+                binding.textView.setVisibility(View.GONE);
+                binding.recyclerCategoryItem.setVisibility(View.GONE);
+                binding.textView2.setVisibility(View.GONE);
+                binding.recyclerOfferItem.setVisibility(View.GONE);
+                binding.textView3.setVisibility(View.GONE);
+                binding.recyclerAllItem.setVisibility(View.GONE);
+                binding.fabId.setVisibility(View.GONE);
+                binding.searchrecyclerid.setVisibility(View.VISIBLE);
 
-       return view;
+            }
+        });*/
 
+        searchtextview.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                binding.closesearchbr.setVisibility(View.VISIBLE);
+              //  binding.moveLayoutId.setVisibility(View.GONE);
+                binding.textView.setVisibility(View.GONE);
+                binding.recyclerCategoryItem.setVisibility(View.GONE);
+                binding.textView2.setVisibility(View.GONE);
+                binding.recyclerOfferItem.setVisibility(View.GONE);
+                binding.textView3.setVisibility(View.GONE);
+                binding.recyclerAllItem.setVisibility(View.GONE);
+                binding.fabId.setVisibility(View.GONE);
+                binding.searchrecyclerid.setVisibility(View.VISIBLE);
+                return false;
+            }
+        });
+
+
+        binding.closesearchbr.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                //binding.moveLayoutId.setVisibility(View.VISIBLE);
+                binding.textView.setVisibility(View.VISIBLE);
+                binding.recyclerCategoryItem.setVisibility(View.VISIBLE);
+                binding.textView2.setVisibility(View.VISIBLE);
+                binding.recyclerOfferItem.setVisibility(View.VISIBLE);
+                binding.textView3.setVisibility(View.VISIBLE);
+                binding.recyclerAllItem.setVisibility(View.VISIBLE);
+                binding.fabId.setVisibility(View.VISIBLE);
+                binding.searchrecyclerid.setVisibility(View.GONE);
+                binding.closesearchbr.setVisibility(View.GONE);
+                searchtextview.setText("");
+
+                InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(getContext().INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(searchtextview.getWindowToken(), 0);
+
+
+                return false;
+            }
+        });
+/*
+        binding.closesearchbr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        });*/
+
+
+        return view;
     }
 
-    private void dataset(){
+
+    private void dataset() {
 
         //get categories
         viewModelHome.getCategories().observe(getActivity(), new Observer<List<ModelProducts>>() { //todo this was changed with getActivity()
             @Override
             public void onChanged(List<ModelProducts> products) {
-                  allEmployee.addAll(products);
-                  categoriesAdapter.notifyDataSetChanged();
+                allEmployee.addAll(products);
+                categoriesAdapter.notifyDataSetChanged();
 
 
-
-               // Log.d("errordipu", "onChanged: "+allEmployee.get(0).getTitle());
+                // Log.d("errordipu", "onChanged: "+allEmployee.get(0).getTitle());
             }
         });
-
-
-
-
-
 
 
     }
 
 
-    private void datasetallproduct(){
+    private void datasetallproduct() {
 
         //todo get All product
 
@@ -185,14 +255,13 @@ binding.fabId.setOnClickListener(new View.OnClickListener() {
                 //  Toast.makeText(getContext(), ""+allOffer.get(0).getTitle(), Toast.LENGTH_SHORT).show();
 
 
-
             }
         });
 
     }
 
 
-    private void datasetoffer(){
+    private void datasetoffer() {
 
 
         //todo get offers
@@ -203,23 +272,14 @@ binding.fabId.setOnClickListener(new View.OnClickListener() {
                 allOffer.addAll(products);
                 offersAdapter.notifyDataSetChanged();
 
-              //  Toast.makeText(getContext(), ""+allOffer.get(0).getTitle(), Toast.LENGTH_SHORT).show();
-
+                //  Toast.makeText(getContext(), ""+allOffer.get(0).getTitle(), Toast.LENGTH_SHORT).show();
 
 
             }
         });
 
 
-
-
-
-
     }
-
-
-
-
 
 
     private void initRecyclerView(RecyclerView.Adapter adapter, RecyclerView view) {
@@ -283,9 +343,9 @@ binding.fabId.setOnClickListener(new View.OnClickListener() {
             }
         }.start();*/
 
-        s1= result.getText();
+        s1 = result.getText();
 
-        String[]  array = s1.split(",");
+        String[] array = s1.split(",");
 
 
         final CartRepository repository = new CartRepository(getContext());
@@ -297,11 +357,10 @@ binding.fabId.setOnClickListener(new View.OnClickListener() {
         String url = array[4];
         String logo = array[5];
 
-        repository.insertSingleData(new ModelCartRoom(name,price,quantity,offers,url,logo));
+        repository.insertSingleData(new ModelCartRoom(name, price, quantity, offers, url, logo));
 
 
-
-        if(!s1.equals("")){
+        if (!s1.equals("")) {
             onPause();
             onResume();
         }

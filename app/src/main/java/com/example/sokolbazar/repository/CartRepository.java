@@ -37,7 +37,7 @@ public class CartRepository {
         new InsetData(roomDao).execute(cartdb);
     }
 
-    public void UpdateSingleData(ModelCartRoom cartdb)
+    public void update(ModelCartRoom cartdb)
     {
         new UpdateData(roomDao).execute(cartdb);
     }
@@ -81,6 +81,12 @@ public class CartRepository {
         protected Void doInBackground(ModelCartRoom... modelCartRooms) {
             roomDao.updateSingleData(modelCartRooms[0]);
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            Toast.makeText(context, "Data Updated", Toast.LENGTH_SHORT).show();
         }
     }
 

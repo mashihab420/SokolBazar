@@ -55,7 +55,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
       
         holder.title.setText(cart.get(position).getP_name());
         holder.price.setText(cart.get(position).getP_price());
-        holder.cart_quantity.setText(cart.get(position).getQuantity());
+       // holder.cart_quantity.setText(cart.get(position).getQuantity());
+
 
 
 
@@ -71,36 +72,44 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                 }else
                 {
                     quantitys -=1;
+
+
+                    CartRepository repository = new CartRepository(context);
+                    ModelCartRoom modelCartRoom = new ModelCartRoom();
+                    modelCartRoom.setQuantity(""+quantitys);
+                    repository.update(modelCartRoom);
+                    holder.cart_quantity.setText(modelCartRoom.getQuantity());
+                    notifyDataSetChanged();
+
+
+
+                    Toast.makeText(context, ""+modelCartRoom.getQuantity(), Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
+
+
 
         holder.plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 quantitys +=1;
-                holder.cart_quantity.setText(""+quantitys);
-
-                /*try {
-                    CartRepository repository = new CartRepository(context);
-                    ModelCartRoom modelCartRoom = new ModelCartRoom();
-                    modelCartRoom.setId(cart.get(position).getId());
-                    modelCartRoom.setQuantity(""+quantitys);
-                    repository.UpdateSingleData(modelCartRoom);
-                    //cart.remove(cart.get(position).getId()-1);
-                    notifyDataSetChanged();
-
-                }catch (Exception e){
-
-                }*/
-
 
                 //TODO ai plus hoya data room a update kora lagbe
 
-              /*  CartRepository repository = new CartRepository(context);
-                repository.UpdateSingleData(new ModelCartRoom(cart.get(position).getP_name(),
-                        cart.get(position).getP_price(),""+quantitys,cart.get(position).getOffers(),cart.get(position).getUrl(),cart.get(position).getC_logo()));*/
-            }
+                CartRepository repository = new CartRepository(context);
+                ModelCartRoom modelCartRoom = new ModelCartRoom();
+                modelCartRoom.setQuantity(""+quantitys);
+                repository.update(modelCartRoom);
+                holder.cart_quantity.setText(modelCartRoom.getQuantity());
+                notifyDataSetChanged();
+
+
+
+                Toast.makeText(context, ""+modelCartRoom.getQuantity(), Toast.LENGTH_SHORT).show();
+
+ }
         });
 
         quantity = Integer.parseInt(cart.get(position).getQuantity());
@@ -270,7 +279,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
 
 
-       // Toast.makeText(context, ""+total, Toast.LENGTH_SHORT).show();
 
         dataSend.totalPrice(""+total);
 
