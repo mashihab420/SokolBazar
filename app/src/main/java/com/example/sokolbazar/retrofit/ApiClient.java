@@ -1,5 +1,13 @@
 package com.example.sokolbazar.retrofit;
 
+
+
+
+
+
+
+import androidx.viewbinding.BuildConfig;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -10,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
     private static Retrofit retrofit;
-    private static final String baseURL = "https://shihab.techdevbd.com/sokol_bazar/";
+   private static final String baseURL = "https://shihab.techdevbd.com/sokol_bazar/";
     private static ApiInterface apiInterface;
 
     public static synchronized ApiInterface getApiInterface(){

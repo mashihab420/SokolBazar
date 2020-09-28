@@ -11,7 +11,7 @@
 
 
         <ImageView
-            android:id="@+id/offer_image"
+            android:id="@+id/searchitem_image"
             android:layout_width="90dp"
             android:layout_height="80dp"
             android:layout_marginTop="16dp"
@@ -20,7 +20,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/offer_price_id"
+            android:id="@+id/price_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -28,13 +28,13 @@
             android:text="429 BDT"
             android:textColor="@color/red"
             android:textSize="14dp"
-            app:layout_constraintStart_toEndOf="@+id/offer_image"
-            app:layout_constraintTop_toBottomOf="@+id/offer_Title_id" />
+            app:layout_constraintStart_toEndOf="@+id/searchitem_image"
+            app:layout_constraintTop_toBottomOf="@+id/Title_id" />
 
 
 
         <TextView
-            android:id="@+id/add_item_id"
+            android:id="@+id/item_id"
             android:layout_width="40dp"
             android:layout_height="24dp"
             android:layout_marginTop="3dp"
@@ -46,7 +46,7 @@
             android:text="ADD"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/offer_Title_id" />
+            app:layout_constraintTop_toBottomOf="@+id/Title_id" />
 
         <TextView
             android:id="@+id/textView2"
@@ -56,12 +56,12 @@
             android:layout_marginEnd="8dp"
             android:text="1"
             android:visibility="gone"
-            app:layout_constraintEnd_toStartOf="@+id/add_item_id"
-            app:layout_constraintTop_toBottomOf="@+id/offer_image" />
+            app:layout_constraintEnd_toStartOf="@+id/item_id"
+            app:layout_constraintTop_toBottomOf="@+id/searchitem_image" />
 
 
         <TextView
-            android:id="@+id/offer_Title_id"
+            android:id="@+id/Title_id"
             android:layout_width="121dp"
             android:layout_height="33dp"
             android:layout_marginStart="16dp"
@@ -69,15 +69,15 @@
             android:textSize="20sp"
             android:fontFamily="@font/montserrat"
             android:text="Pureit Kit "
-            app:layout_constraintStart_toEndOf="@+id/offer_image"
+            app:layout_constraintStart_toEndOf="@+id/searchitem_image"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/shoplogo"
             android:layout_width="49dp"
             android:layout_height="43dp"
-            app:layout_constraintBottom_toBottomOf="@+id/offer_image"
-            app:layout_constraintEnd_toEndOf="@+id/offer_image" />
+            app:layout_constraintBottom_toBottomOf="@+id/searchitem_image"
+            app:layout_constraintEnd_toEndOf="@+id/searchitem_image" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

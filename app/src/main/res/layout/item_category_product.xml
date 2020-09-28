@@ -14,7 +14,7 @@
 
 
         <ImageView
-            android:id="@+id/offer_image"
+            android:id="@+id/searchitem_image"
             android:layout_width="100dp"
             android:layout_height="110dp"
             android:layout_marginTop="16dp"
@@ -33,11 +33,11 @@
             android:text="Pureit kit"
             android:textColor="@color/black_material"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/offer_image" />
+            app:layout_constraintTop_toBottomOf="@+id/searchitem_image" />
 
 
         <TextView
-            android:id="@+id/add_item_id"
+            android:id="@+id/item_id"
             android:layout_width="40dp"
             android:layout_height="24dp"
             android:layout_marginTop="3dp"

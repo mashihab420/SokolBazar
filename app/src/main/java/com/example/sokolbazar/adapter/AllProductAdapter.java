@@ -107,10 +107,10 @@ public class AllProductAdapter extends RecyclerView.Adapter<AllProductAdapter.My
         public ImageView bg_offer;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.offer_Title_id);
-            price = itemView.findViewById(R.id.offer_price_id);
-            bg_offer = itemView.findViewById(R.id.offer_image);
-            addicon = itemView.findViewById(R.id.add_item_id);
+            title = itemView.findViewById(R.id.Title_id);
+            price = itemView.findViewById(R.id.price_id);
+            bg_offer = itemView.findViewById(R.id.searchitem_image);
+            addicon = itemView.findViewById(R.id.item_id);
         }
     }
 }

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,50 +19,49 @@ import com.example.sokolbazar.model.ModelCartRoom;
 import com.example.sokolbazar.model.ModelProducts;
 import com.example.sokolbazar.repository.CartRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class AllCategoryAdapter extends RecyclerView.Adapter<AllCategoryAdapter.MyViewHolder> {
-    private List<ModelProducts> allcategoryitem;
+public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHolder> {
+    private List<ModelProducts> allproduct;
     Context context;
 
-    public AllCategoryAdapter(List<ModelProducts> allcategoryitem, Context context) {
-        this.allcategoryitem = allcategoryitem;
+    public SearchAdapter(List<ModelProducts> allproduct, Context context) {
+        this.allproduct = allproduct;
         this.context = context;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_searchview,parent,false);
 
-
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_category_product,parent,false);
-
-        return  new AllCategoryAdapter.MyViewHolder(view);
+        return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        holder.title.setText(allproduct.get(position).getPName());
+        holder.price.setText(allproduct.get(position).getPPrice());
 
-        holder.title.setText(allcategoryitem.get(position).getPName());
-        holder.price.setText(allcategoryitem.get(position).getPPrice()+" BDT");
-        String url = "http://shihab.techdevbd.com/sokol_bazar/file_upload_api/"+allcategoryitem.get(position).getImageUrl();
+        String imageurl = "http://shihab.techdevbd.com/sokol_bazar/file_upload_api/"+allproduct.get(position).getImageUrl();
+
         Glide
                 .with(context)
-                .load(url)
-                .into(holder.pic);
-
+                .load(imageurl)
+                .centerCrop()
+                .into(holder.bg_offer);
 
         holder.addicon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final CartRepository repository = new CartRepository(context);
-                String name = allcategoryitem.get(position).getPName();
-                String price = allcategoryitem.get(position).getPPrice();
-                String url = "http://shihab.techdevbd.com/sokol_bazar/file_upload_api/"+allcategoryitem.get(position).getImageUrl();
-                //   String description = offers.get(position).getDescription();
+                String name = allproduct.get(position).getPName();
+                String price = allproduct.get(position).getPPrice();
+                String url = "http://shihab.techdevbd.com/sokol_bazar/file_upload_api/"+allproduct.get(position).getImageUrl();
                 String quantity = "1";
-                String offer = allcategoryitem.get(position).getOffers();
-                String shopname = allcategoryitem.get(position).getShopName();
+                String offer = allproduct.get(position).getOffers();
+                String shopname = allproduct.get(position).getShopName();
 
                 repository.insertSingleData(new ModelCartRoom(name,price,quantity,offer,url,shopname));
             }
@@ -71,14 +71,14 @@ public class AllCategoryAdapter extends RecyclerView.Adapter<AllCategoryAdapter.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = allcategoryitem.get(position).getPName();
-                String price = allcategoryitem.get(position).getPPrice();
-                String url = "http://shihab.techdevbd.com/sokol_bazar/file_upload_api/"+allcategoryitem.get(position).getImageUrl();
+                String name = allproduct.get(position).getPName();
+                String price = allproduct.get(position).getPPrice();
+                String url = "http://shihab.techdevbd.com/sokol_bazar/file_upload_api/"+allproduct.get(position).getImageUrl();
                 String quantity = "1";
-                String description = allcategoryitem.get(position).getDescription();
-                String offer = allcategoryitem.get(position).getOffers();
-                String shopname = allcategoryitem.get(position).getShopName();
 
+                String description = allproduct.get(position).getDescription();
+                String offer = allproduct.get(position).getOffers();
+                String shopname = allproduct.get(position).getShopName();
 
                 Intent intent = new Intent(context, ProductDetails.class);
                 intent.putExtra("pname",name);
@@ -86,28 +86,37 @@ public class AllCategoryAdapter extends RecyclerView.Adapter<AllCategoryAdapter.
                 intent.putExtra("quantity",quantity);
                 intent.putExtra("description",description);
                 intent.putExtra("offers",offer);
-                intent.putExtra("url",url);
                 intent.putExtra("shopname",shopname);
+                intent.putExtra("url",url);
 
                 context.startActivity(intent);
             }
         });
 
+
     }
 
     @Override
     public int getItemCount() {
-        return allcategoryitem.size();
+        return allproduct.size();
     }
+
+    public void search_filter_list(ArrayList<ModelProducts> filter_list){
+
+        allproduct=filter_list;
+        notifyDataSetChanged();
+
+    }
+
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title,price,addicon;
-        public ImageView pic;
+        public ImageView bg_offer;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.product_name);
-            price = itemView.findViewById(R.id.p_price);
-            pic = itemView.findViewById(R.id.searchitem_image);
+            title = itemView.findViewById(R.id.Title_id);
+            price = itemView.findViewById(R.id.price_id);
+            bg_offer = itemView.findViewById(R.id.searchitem_image);
             addicon = itemView.findViewById(R.id.item_id);
         }
     }

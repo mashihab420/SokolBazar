@@ -14,6 +14,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -27,6 +29,7 @@ import com.example.sokolbazar.R;
 import com.example.sokolbazar.adapter.AllProductAdapter;
 import com.example.sokolbazar.adapter.CategoriesAdapter;
 import com.example.sokolbazar.adapter.OffersAdapter;
+import com.example.sokolbazar.adapter.SearchAdapter;
 import com.example.sokolbazar.databinding.FragmentHomeBinding;
 import com.example.sokolbazar.model.ModelCart;
 import com.example.sokolbazar.model.ModelCartRoom;
@@ -66,12 +69,15 @@ public class FragmentHome extends Fragment implements ZXingScannerView.ResultHan
     private CategoriesAdapter categoriesAdapter;
     private OffersAdapter offersAdapter;
     private AllProductAdapter allProductAdapter;
+    private SearchAdapter searchAdapter;
 
     public static ArrayList<ModelCart> arrayList = new ArrayList<>();
 
     List<ModelProducts> allEmployee; //= new ArrayList<>();
 
     List<ModelProducts> products;
+
+    List<ModelProducts> searchitem;
 
     List<ModelProducts> allOffer;
     CartRepository repository;
@@ -151,23 +157,11 @@ public class FragmentHome extends Fragment implements ZXingScannerView.ResultHan
         initRecyclerViewAllproduct(allProductAdapter, binding.recyclerAllItem);
 
 
-       /* searchtextview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "hide", Toast.LENGTH_SHORT).show();
-                binding.closesearchbr.setVisibility(View.VISIBLE);
-                binding.moveLayoutId.setVisibility(View.GONE);
-                binding.textView.setVisibility(View.GONE);
-                binding.recyclerCategoryItem.setVisibility(View.GONE);
-                binding.textView2.setVisibility(View.GONE);
-                binding.recyclerOfferItem.setVisibility(View.GONE);
-                binding.textView3.setVisibility(View.GONE);
-                binding.recyclerAllItem.setVisibility(View.GONE);
-                binding.fabId.setVisibility(View.GONE);
-                binding.searchrecyclerid.setVisibility(View.VISIBLE);
+        searchitem = new ArrayList<>();
+        searchAdapter = new SearchAdapter(searchitem, getContext());
+        initRecyclerViewSearchproduct(searchAdapter, binding.searchrecyclerid);
 
-            }
-        });*/
+
 
         searchtextview.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -206,22 +200,53 @@ public class FragmentHome extends Fragment implements ZXingScannerView.ResultHan
                 InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(getContext().INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(searchtextview.getWindowToken(), 0);
 
-
                 return false;
             }
         });
-/*
-        binding.closesearchbr.setOnClickListener(new View.OnClickListener() {
+
+
+        searchtextview.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View v) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                product_filter(s.toString());
 
 
             }
-        });*/
+        });
 
 
         return view;
     }
+
+    public void product_filter(String book_name){
+
+
+        ArrayList<ModelProducts> filter_product=new ArrayList<>();
+        for (ModelProducts item: products){
+
+            if (item.getPName().toLowerCase().contains(book_name.toLowerCase()))
+            {
+                filter_product.add(item);
+            }
+
+
+
+        }
+
+        searchAdapter.search_filter_list(filter_product);
+    }
+
 
 
     private void dataset() {
@@ -253,6 +278,25 @@ public class FragmentHome extends Fragment implements ZXingScannerView.ResultHan
                 allProductAdapter.notifyDataSetChanged();
 
                 //  Toast.makeText(getContext(), ""+allOffer.get(0).getTitle(), Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
+
+    }
+
+
+
+
+    private void datasetSearchproduct() {
+
+        //todo get All product
+
+        viewModelHome.getProducts().observe(getActivity(), new Observer<List<ModelProducts>>() {
+            @Override
+            public void onChanged(List<ModelProducts> employees) {
+                searchitem.addAll(employees);
+                searchAdapter.notifyDataSetChanged();
 
 
             }
@@ -308,6 +352,13 @@ public class FragmentHome extends Fragment implements ZXingScannerView.ResultHan
         datasetallproduct();
     }
 
+    private void initRecyclerViewSearchproduct(RecyclerView.Adapter adapter, RecyclerView view) {
+        view.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        view.setAdapter(adapter);
+        searchAdapter.notifyDataSetChanged();
+
+        datasetSearchproduct();
+    }
     private void initViewModel() {
         viewModelHome = new ViewModelProvider.AndroidViewModelFactory(getActivity().getApplication()).create(ViewModelHome.class);
     }
