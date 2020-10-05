@@ -119,11 +119,17 @@ public class CartActivity extends AppCompatActivity implements OnDataSend{
         subtotal.setText(value);
         int subtotal = Integer.parseInt(value);
 
-       int totall = subtotal+50;
+       int totall = subtotal;
 
-       total.setText(""+totall);
+      total.setText(""+totall);
 
 
+    }
+
+    public void confirmorderId(View view) {
+
+        Intent intent = new Intent(getApplicationContext(),QRCodeGeneratorActivity.class);
+        startActivity(intent);
     }
 
     /*@Override

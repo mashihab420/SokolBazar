@@ -34,7 +34,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_searchview,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_searchview, parent, false);
 
         return new MyViewHolder(view);
     }
@@ -44,7 +44,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
         holder.title.setText(allproduct.get(position).getPName());
         holder.price.setText(allproduct.get(position).getPPrice());
 
-        String imageurl = "http://shihab.techdevbd.com/sokol_bazar/file_upload_api/"+allproduct.get(position).getImageUrl();
+        String imageurl = "http://shihab.techdevbd.com/sokol_bazar/file_upload_api/" + allproduct.get(position).getImageUrl();
 
         Glide
                 .with(context)
@@ -58,12 +58,12 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
                 final CartRepository repository = new CartRepository(context);
                 String name = allproduct.get(position).getPName();
                 String price = allproduct.get(position).getPPrice();
-                String url = "http://shihab.techdevbd.com/sokol_bazar/file_upload_api/"+allproduct.get(position).getImageUrl();
+                String url = "http://shihab.techdevbd.com/sokol_bazar/file_upload_api/" + allproduct.get(position).getImageUrl();
                 String quantity = "1";
                 String offer = allproduct.get(position).getOffers();
                 String shopname = allproduct.get(position).getShopName();
 
-                repository.insertSingleData(new ModelCartRoom(name,price,quantity,offer,url,shopname));
+                repository.insertSingleData(new ModelCartRoom(name, price, quantity, offer, url, shopname));
             }
         });
 
@@ -73,7 +73,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
             public void onClick(View v) {
                 String name = allproduct.get(position).getPName();
                 String price = allproduct.get(position).getPPrice();
-                String url = "http://shihab.techdevbd.com/sokol_bazar/file_upload_api/"+allproduct.get(position).getImageUrl();
+                String url = "http://shihab.techdevbd.com/sokol_bazar/file_upload_api/" + allproduct.get(position).getImageUrl();
                 String quantity = "1";
 
                 String description = allproduct.get(position).getDescription();
@@ -81,13 +81,13 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
                 String shopname = allproduct.get(position).getShopName();
 
                 Intent intent = new Intent(context, ProductDetails.class);
-                intent.putExtra("pname",name);
-                intent.putExtra("pprice",price);
-                intent.putExtra("quantity",quantity);
-                intent.putExtra("description",description);
-                intent.putExtra("offers",offer);
-                intent.putExtra("shopname",shopname);
-                intent.putExtra("url",url);
+                intent.putExtra("pname", name);
+                intent.putExtra("pprice", price);
+                intent.putExtra("quantity", quantity);
+                intent.putExtra("description", description);
+                intent.putExtra("offers", offer);
+                intent.putExtra("shopname", shopname);
+                intent.putExtra("url", url);
 
                 context.startActivity(intent);
             }
@@ -101,17 +101,18 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
         return allproduct.size();
     }
 
-    public void search_filter_list(ArrayList<ModelProducts> filter_list){
+    public void search_filter_list(ArrayList<ModelProducts> filter_list) {
 
-        allproduct=filter_list;
+        allproduct = filter_list;
         notifyDataSetChanged();
 
     }
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title,price,addicon;
+        public TextView title, price, addicon;
         public ImageView bg_offer;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.Title_id);

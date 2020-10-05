@@ -3,6 +3,7 @@ package com.example.sokolbazar.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,17 +27,16 @@ import java.util.List;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> {
 
     List<ModelCartRoom> cart;
-     Context context;
-     CartRepository repository;
-     private OnDataSend dataSend;
+    Context context;
+    CartRepository repository;
+    private OnDataSend dataSend;
 
-     public int total = 0;
+    int total = 0;
     int taka = 0;
     int quantity;
 
-    int quantitys=1;
 
-    public CartAdapter(Context context, List<ModelCartRoom> cart, CartRepository repository,OnDataSend dataSend) {
+    public CartAdapter(Context context, List<ModelCartRoom> cart, CartRepository repository, OnDataSend dataSend) {
         this.cart = cart;
         this.context = context;
         this.repository = repository;
@@ -46,81 +46,82 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cart,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cart, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-      
+
         holder.title.setText(cart.get(position).getP_name());
         holder.price.setText(cart.get(position).getP_price());
-       // holder.cart_quantity.setText(cart.get(position).getQuantity());
+        // holder.cart_quantity.setText(cart.get(position).getQuantity());
 
-
-
+        holder.cart_quantity.setText(cart.get(position).getQuantity());
 
 
         holder.minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int quantitys = Integer.parseInt(cart.get(position).getQuantity());
 
                 //TODO ai minus hoya data room a update kora lagbe
-
-                if (quantitys==1){
-                    holder.cart_quantity.setText("1");
-                }else
-                {
-                    quantitys -=1;
-
+                if (quantitys > 1) {
+                    quantitys -= 1;
 
                     CartRepository repository = new CartRepository(context);
-                    ModelCartRoom modelCartRoom = new ModelCartRoom();
-                    modelCartRoom.setQuantity(""+quantitys);
-                    repository.update(modelCartRoom);
-                    holder.cart_quantity.setText(modelCartRoom.getQuantity());
-                    notifyDataSetChanged();
+                    cart.get(position).setQuantity("" + quantitys);;
+                    repository.update(cart.get(position));
 
+                    holder.cart_quantity.setText(cart.get(position).getQuantity());
 
+                    taka = 0;
+                    total =0;
 
-                    Toast.makeText(context, ""+modelCartRoom.getQuantity(), Toast.LENGTH_SHORT).show();
 
                 }
             }
         });
 
 
-
         holder.plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                quantitys +=1;
+
+                int quantitys = Integer.parseInt(cart.get(position).getQuantity());
+                quantitys += 1;
 
                 //TODO ai plus hoya data room a update kora lagbe
 
                 CartRepository repository = new CartRepository(context);
-                ModelCartRoom modelCartRoom = new ModelCartRoom();
-                modelCartRoom.setQuantity(""+quantitys);
-                repository.update(modelCartRoom);
-                holder.cart_quantity.setText(modelCartRoom.getQuantity());
-                notifyDataSetChanged();
+                cart.get(position).setQuantity("" + quantitys);
+                repository.update(cart.get(position));
+                holder.cart_quantity.setText(cart.get(position).getQuantity());
 
 
+                taka = 0;
+                total =0;
 
-                Toast.makeText(context, ""+modelCartRoom.getQuantity(), Toast.LENGTH_SHORT).show();
 
- }
+            }
         });
 
-        quantity = Integer.parseInt(cart.get(position).getQuantity());
-         taka = (Integer.parseInt(cart.get(position).getP_price()))*quantity;
-        total = total+taka;
+       quantity = Integer.parseInt(cart.get(position).getQuantity());
+        taka = (Integer.parseInt(cart.get(position).getP_price())) * quantity;
+        Log.d("taka", ""+taka);
+       total = total + taka;
+
+
+
+
+
 
         String offer = cart.get(position).getOffers();
 
-       // Toast.makeText(context, ""+offer, Toast.LENGTH_SHORT).show();
 
-        if (offer.equals("5")){
+
+
+        if (offer.equals("5")) {
             Glide
                     .with(context)
                     .load(R.drawable.offer5)
@@ -129,7 +130,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
 
         }
-        if (offer.equals("10")){
+        if (offer.equals("10")) {
             Glide
                     .with(context)
                     .load(R.drawable.offer10)
@@ -137,7 +138,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                     .into(holder.offerpercent);
         }
 
-        if (offer.equals("15")){
+        if (offer.equals("15")) {
             Glide
                     .with(context)
                     .load(R.drawable.offer15)
@@ -145,7 +146,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                     .into(holder.offerpercent);
         }
 
-        if (offer.equals("20")){
+        if (offer.equals("20")) {
             Glide
                     .with(context)
                     .load(R.drawable.offer20)
@@ -153,7 +154,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                     .into(holder.offerpercent);
         }
 
-        if (offer.equals("25")){
+        if (offer.equals("25")) {
             Glide
                     .with(context)
                     .load(R.drawable.offer25)
@@ -161,7 +162,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                     .into(holder.offerpercent);
         }
 
-        if (offer.equals("30")){
+        if (offer.equals("30")) {
             Glide
                     .with(context)
                     .load(R.drawable.offer30)
@@ -169,7 +170,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                     .into(holder.offerpercent);
         }
 
-        if (offer.equals("35")){
+        if (offer.equals("35")) {
             Glide
                     .with(context)
                     .load(R.drawable.offer35)
@@ -177,7 +178,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                     .into(holder.offerpercent);
         }
 
-        if (offer.equals("40")){
+        if (offer.equals("40")) {
             Glide
                     .with(context)
                     .load(R.drawable.offer40)
@@ -185,7 +186,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                     .into(holder.offerpercent);
         }
 
-        if (offer.equals("45")){
+        if (offer.equals("45")) {
             Glide
                     .with(context)
                     .load(R.drawable.offer45)
@@ -193,14 +194,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                     .into(holder.offerpercent);
         }
 
-        if (offer.equals("50")){
+        if (offer.equals("50")) {
             Glide
                     .with(context)
                     .load(R.drawable.offer50)
                     .centerCrop()
                     .into(holder.offerpercent);
         }
-
 
 
         Glide
@@ -210,12 +210,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                 .into(holder.productimage);
 
 
-
         String shopname = cart.get(position).getC_logo();
 
 
-
-       if (shopname.equals("shwapno")){
+        if (shopname.equals("shwapno")) {
             Glide
                     .with(context)
                     .load(R.drawable.swapno)
@@ -223,8 +221,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                     .into(holder.brandimage);
             holder.productlayout.setBackgroundColor(Color.parseColor("#FE6268"));
         }
-        if (shopname.equals("agora"))
-        {
+        if (shopname.equals("agora")) {
             Glide
                     .with(context)
                     .load(R.drawable.agora)
@@ -233,8 +230,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             holder.productlayout.setBackgroundColor(Color.parseColor("#74F5D2"));
         }
 
-        if (shopname.equals("aarong"))
-        {
+        if (shopname.equals("aarong")) {
             Glide
                     .with(context)
                     .load(R.drawable.aarong)
@@ -243,50 +239,44 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             holder.productlayout.setBackgroundColor(Color.parseColor("#FBA257"));
         }
 
-        if (shopname.equals("")){
+        if (shopname.equals("")) {
             holder.productlayout.setBackgroundColor(Color.parseColor("#74F5D2"));
         }
 
-
-
-        
 
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-              //  repository.deleteSingleData(cart.get(position).getId());
+                //  repository.deleteSingleData(cart.get(position).getId());
 
                 try {
                     CartRepository repository = new CartRepository(context);
                     ModelCartRoom modelCartRoom = new ModelCartRoom();
                     modelCartRoom.setId(cart.get(position).getId());
+                    total = 0;
                     repository.delete(modelCartRoom);
-                    cart.remove(cart.get(position).getId()-1);
+                    cart.clear();
+                    cart.remove(cart.get(position).getId() - 1);
 
-                    taka =0;
-                    total =0;
+                    //taka =0;
+
                     notifyDataSetChanged();
-                //    Toast.makeText(context, ""+cart.get(position).getId(), Toast.LENGTH_SHORT).show();
-                }catch (Exception e){
-                   // Toast.makeText(context, ""+e, Toast.LENGTH_SHORT).show();
+                    //    Toast.makeText(context, ""+cart.get(position).getId(), Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    // Toast.makeText(context, ""+e, Toast.LENGTH_SHORT).show();
                 }
-
 
 
             }
         });
 
 
-
-
-        dataSend.totalPrice(""+total);
-
+        dataSend.totalPrice("" + total);
+      //  dataSend.totalPrice("" + positonnn);
 
 
     }
-
-
 
 
     @Override
@@ -295,9 +285,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public ImageView productimage,brandimage,offerpercent,delete;
-        public TextView title,price,cart_quantity,plus,minus;
+        public ImageView productimage, brandimage, offerpercent, delete;
+        public TextView title, price, cart_quantity, plus, minus;
         ConstraintLayout productlayout;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.title_name_id);
@@ -308,7 +299,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             offerpercent = itemView.findViewById(R.id.offer_id);
             productlayout = itemView.findViewById(R.id.productlayoutId);
             delete = itemView.findViewById(R.id.delete_fromCart);
-            plus= itemView.findViewById(R.id.plusebtid);
+            plus = itemView.findViewById(R.id.plusebtid);
             minus = itemView.findViewById(R.id.minusbtid);
         }
     }

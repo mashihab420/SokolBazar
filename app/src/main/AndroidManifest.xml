@@ -19,7 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.ProductDetails"></activity>
+        <activity android:name=".activity.RegistrationActivity"></activity>
+        <activity android:name=".activity.QRCodeGeneratorActivity" />
+        <activity android:name=".activity.ProductDetails" />
         <activity android:name=".activity.CategoryActivity" />
         <activity android:name=".activity.DeliveryActivity" />
         <activity android:name=".activity.CartActivity" />
