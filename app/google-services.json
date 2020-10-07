@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "236716196734",
+    "firebase_url": "https://sokolbazar-b1d80.firebaseio.com",
+    "project_id": "sokolbazar-b1d80",
+    "storage_bucket": "sokolbazar-b1d80.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:236716196734:android:5323c4779528f94216692f",
+        "android_client_info": {
+          "package_name": "com.techdevbd.sokolbazar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "236716196734-48jvh26fesrmgfntk8uo3g7fqqjk71dv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6DIYqh0dxLFaI6Kmm_g4CjF00RLLAaFI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "236716196734-48jvh26fesrmgfntk8uo3g7fqqjk71dv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
