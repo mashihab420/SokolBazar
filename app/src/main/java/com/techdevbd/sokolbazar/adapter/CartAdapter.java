@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -32,6 +33,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
     int taka = 0;
     int quantity;
 
+    int disquantity;
+    int distotal = 0;
+    int distaka = 0;
+    int offer;
+
+    int dispercent;
 
     public CartAdapter(Context context, List<ModelCartRoom> cart, CartRepository repository, OnDataSend dataSend) {
         this.cart = cart;
@@ -75,6 +82,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                     taka = 0;
                     total =0;
 
+                    distotal = 0;
+                    distaka = 0;
 
                 }
             }
@@ -100,16 +109,33 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                 total =0;
 
 
+                distotal = 0;
+                distaka = 0;
+
             }
         });
 
+        //subtotal calculation start
        quantity = Integer.parseInt(cart.get(position).getQuantity());
         taka = (Integer.parseInt(cart.get(position).getP_price())) * quantity;
         Log.d("taka", ""+taka);
        total = total + taka;
+        //subtotal calculation end
 
 
 
+       //discount calculation start
+        disquantity = Integer.parseInt(cart.get(position).getQuantity());
+        offer = Integer.parseInt(cart.get(position).getOffers());
+        distaka = (Integer.parseInt(cart.get(position).getP_price())) * disquantity;
+
+        distaka = ((Integer.parseInt(cart.get(position).getP_price())) * disquantity)-((offer*(Integer.parseInt(cart.get(position).getP_price())))/100)*disquantity;
+        Log.d("taka", ""+distaka);
+        distotal = distotal + distaka;
+        //discount calculation end
+
+
+         dispercent= (100*(total-distotal))/total;
 
 
 
@@ -251,7 +277,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                     CartRepository repository = new CartRepository(context);
                     ModelCartRoom modelCartRoom = new ModelCartRoom();
                     modelCartRoom.setId(cart.get(position).getId());
+
                     total = 0;
+
+                    distotal = 0;
+
                     repository.delete(modelCartRoom);
                     cart.clear();
                     cart.remove(cart.get(position).getId() - 1);
@@ -269,7 +299,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         });
 
 
-        dataSend.totalPrice("" + total);
+        dataSend.totalPrice("" + distotal,""+dispercent);
       //  dataSend.totalPrice("" + positonnn);
 
 

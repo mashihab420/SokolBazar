@@ -25,7 +25,7 @@ import java.util.List;
 public class CartActivity extends AppCompatActivity implements OnDataSend{
 
     ConstraintLayout constraintLayout;
-    TextView address,subtotal,total;
+    TextView address,subtotal,total,discount;
     ImageView emptyimage,backbutton;
     RecyclerView recyclerView;
     CartAdapter adapter;
@@ -45,6 +45,7 @@ MysharedPreferance sharedPreferance;
         emptyimage = findViewById(R.id.empty_cartimg);
         backbutton = findViewById(R.id.backicon);
         subtotal = findViewById(R.id.textView12);
+        discount = findViewById(R.id.textView13);
         total = findViewById(R.id.textView15);
         sharedPreferance = MysharedPreferance.getPreferences(getApplicationContext());
         arrayList = new ArrayList<>();
@@ -116,13 +117,14 @@ MysharedPreferance sharedPreferance;
 
 
     @Override
-    public void totalPrice(String value) {
-        subtotal.setText(value);
+    public void totalPrice(String value,String discountt) {
+        subtotal.setText(value+" BDT");
+        discount.setText(discountt+"%");
         int subtotal = Integer.parseInt(value);
 
-       int totall = subtotal;
+       int totall = subtotal+50;
 
-      total.setText(""+totall);
+      total.setText(totall+" BDT");
 
 
     }
