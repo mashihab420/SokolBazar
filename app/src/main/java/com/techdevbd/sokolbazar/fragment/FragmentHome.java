@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -24,6 +25,7 @@ import android.widget.TextView;
 
 
 import com.techdevbd.sokolbazar.R;
+import com.techdevbd.sokolbazar.activity.MainActivity;
 import com.techdevbd.sokolbazar.adapter.AllProductAdapter;
 import com.techdevbd.sokolbazar.adapter.CategoriesAdapter;
 import com.techdevbd.sokolbazar.adapter.OffersAdapter;
@@ -101,6 +103,9 @@ public class FragmentHome extends Fragment implements ZXingScannerView.ResultHan
                 requestPermissions(new String[]{Manifest.permission.CAMERA}, 5);
             }
         }
+
+
+
 
         // ViewGroup contentFrame = (ViewGroup) findViewById(R.id.content_frame);
         mScannerView = new ZXingScannerView(getContext());

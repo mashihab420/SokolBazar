@@ -2,8 +2,10 @@ package com.techdevbd.sokolbazar.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.Observer;
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -29,7 +31,9 @@ import com.techdevbd.sokolbazar.repository.CartRepository;
 import com.techdevbd.sokolbazar.retrofit.ApiClient;
 import com.techdevbd.sokolbazar.retrofit.ApiInterface;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -91,6 +95,14 @@ public class DeliveryActivity extends AppCompatActivity {
             }
         });
 
+        //for storage permission
+
+
+        ActivityCompat.requestPermissions(DeliveryActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+        ActivityCompat.requestPermissions(DeliveryActivity.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
+
+
+
 
     }
 
@@ -101,6 +113,8 @@ public class DeliveryActivity extends AppCompatActivity {
             if (spinnertext.equals("Pick a time")) {
                 Toast.makeText(this, "You Must Pick A  Time", Toast.LENGTH_SHORT).show();
             } else {
+
+
 
 
                 repository.getAllData().observe(this, new Observer<List<ModelCartRoom>>() {
@@ -121,6 +135,10 @@ public class DeliveryActivity extends AppCompatActivity {
 
                             String phone = sharedPreferance.getPhone();
 
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yy hh.mm.ss aa");
+                            String formattedDate = dateFormat.format(new Date()).toString();
+
+
                             ModelOrderProduct modelOrderProduct = new ModelOrderProduct();
                             modelOrderProduct.setPhone(phone);
                             modelOrderProduct.setProduct_name(modelCartRooms.get(i).getP_name());
@@ -134,6 +152,7 @@ public class DeliveryActivity extends AppCompatActivity {
                             modelOrderProduct.setImage_url(modelCartRooms.get(i).getUrl());
                             modelOrderProduct.setDelivery_time(spinnertext);
                             modelOrderProduct.setDelivery_type("Home Delivery");
+                            modelOrderProduct.setEntry_time(formattedDate);
 
 
                             apiInterface.userOrderInsert(modelOrderProduct).enqueue(new Callback<ModelOrderProduct>() {
@@ -141,6 +160,11 @@ public class DeliveryActivity extends AppCompatActivity {
                                 public void onResponse(Call<ModelOrderProduct> call, Response<ModelOrderProduct> response) {
                                     if (response.isSuccessful()) {
 
+                                        Intent intent = new Intent(DeliveryActivity.this,ConfirmOrderActivity.class);
+                                        intent.putExtra("order_id",ordernumberselfservice);
+                                        intent.putExtra("phone",phone);
+                                        intent.putExtra("delivery_type","Home Delivery");
+                                        startActivity(intent);
 
 
                                     } else {
@@ -171,7 +195,7 @@ public class DeliveryActivity extends AppCompatActivity {
                         }
 
 
-                        Toast.makeText(DeliveryActivity.this, "Order confirmed", Toast.LENGTH_SHORT).show();
+                       Toast.makeText(DeliveryActivity.this, "Order confirmed", Toast.LENGTH_SHORT).show();
 
 
                     }
@@ -202,6 +226,9 @@ public class DeliveryActivity extends AppCompatActivity {
                     for (i = 0; i < arrayList.size(); i++) {
 
                         String phone = sharedPreferance.getPhone();
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yy hh.mm.ss aa");
+                        String formattedDate = dateFormat.format(new Date()).toString();
+
                         ModelOrderProduct modelOrderProduct = new ModelOrderProduct();
                         modelOrderProduct.setPhone(phone);
                         modelOrderProduct.setProduct_name(modelCartRooms.get(i).getP_name());
@@ -215,14 +242,18 @@ public class DeliveryActivity extends AppCompatActivity {
                         modelOrderProduct.setImage_url(modelCartRooms.get(i).getUrl());
                         modelOrderProduct.setDelivery_time("Any Time");
                         modelOrderProduct.setDelivery_type("Self Service");
-
+                        modelOrderProduct.setEntry_time(formattedDate);
 
                         apiInterface.userOrderInsert(modelOrderProduct).enqueue(new Callback<ModelOrderProduct>() {
                             @Override
                             public void onResponse(Call<ModelOrderProduct> call, Response<ModelOrderProduct> response) {
                                 if (response.isSuccessful()) {
 
-
+                                    Intent intent = new Intent(DeliveryActivity.this,ConfirmOrderActivity.class);
+                                    intent.putExtra("order_id",ordernumberselfservice);
+                                    intent.putExtra("phone",phone);
+                                    intent.putExtra("delivery_type","Self Service");
+                                    startActivity(intent);
 
                                 } else {
                                     Toast.makeText(DeliveryActivity.this, "Order Not Confirmed", Toast.LENGTH_SHORT).show();
@@ -252,7 +283,7 @@ public class DeliveryActivity extends AppCompatActivity {
 
                     }
 
-                    Toast.makeText(DeliveryActivity.this, "Order confirmed", Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(DeliveryActivity.this, "Order confirmed", Toast.LENGTH_SHORT).show();
 
 
                 }

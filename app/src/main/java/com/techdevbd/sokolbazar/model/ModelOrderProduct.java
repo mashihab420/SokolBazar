@@ -58,6 +58,10 @@ public class ModelOrderProduct {
     @Expose
     private String 	Delivery_time;
 
+    @SerializedName("entry_time")
+    @Expose
+    private String 	Entry_time;
+
     @SerializedName("message")
     @Expose
     private String 	Message;
@@ -172,5 +176,14 @@ public class ModelOrderProduct {
 
     public void setDelivery_type(String delivery_type) {
         Delivery_type = delivery_type;
+    }
+
+
+    public String getEntry_time() {
+        return Entry_time;
+    }
+
+    public void setEntry_time(String entry_time) {
+        Entry_time = entry_time;
     }
 }

@@ -2,6 +2,7 @@ package com.techdevbd.sokolbazar.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
@@ -26,6 +27,12 @@ public class QRCodeGeneratorActivity extends AppCompatActivity {
         qrtext = findViewById(R.id.editTextTextPersonName);
         qrcodeimg = findViewById(R.id.imageView);
         bt = findViewById(R.id.button);
+
+      //  Intent intent = getIntent();
+        //String qr = intent.getStringExtra("qrcode");
+
+
+
 
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
