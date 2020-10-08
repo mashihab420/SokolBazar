@@ -175,7 +175,7 @@ public class Verify_NumberActivity extends AppCompatActivity {
 
                             sendData(modelUsers);
 
-                            Intent intent = new Intent(Verify_NumberActivity.this,WelcomeActivity.class);
+                            Intent intent = new Intent(Verify_NumberActivity.this,DeliveryActivity.class);
                             startActivity(intent);
 
 

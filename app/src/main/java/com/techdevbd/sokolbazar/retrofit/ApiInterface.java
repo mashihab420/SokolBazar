@@ -1,6 +1,7 @@
 package com.techdevbd.sokolbazar.retrofit;
 
 
+import com.techdevbd.sokolbazar.model.ModelOrderProduct;
 import com.techdevbd.sokolbazar.model.ModelProducts;
 import com.techdevbd.sokolbazar.model.ModelUsers;
 
@@ -35,6 +36,9 @@ public interface ApiInterface {
 
     @POST("insert_user_info.php")
     Call<ModelUsers> addUsers(@Body ModelUsers modelUsers);
+
+    @POST("user_order_insert.php")
+    Call<ModelOrderProduct> userOrderInsert(@Body ModelOrderProduct modelOrderProduct);
 
 
     @GET("userlogin.php")

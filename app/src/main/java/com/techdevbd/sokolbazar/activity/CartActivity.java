@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.techdevbd.sokolbazar.MysharedPreferance;
 import com.techdevbd.sokolbazar.R;
@@ -21,6 +22,7 @@ import com.techdevbd.sokolbazar.repository.CartRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class CartActivity extends AppCompatActivity implements OnDataSend{
 
@@ -34,6 +36,10 @@ public class CartActivity extends AppCompatActivity implements OnDataSend{
     CartRepository repository;
     int num = 1;
     int my_taka =0;
+    int totall;
+    String sub;
+    int totalll;
+    String dis;
 MysharedPreferance sharedPreferance;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,18 +128,46 @@ MysharedPreferance sharedPreferance;
         discount.setText(discountt+"%");
         int subtotal = Integer.parseInt(value);
 
-       int totall = subtotal+50;
+
+
+       totall = subtotal+50;
 
       total.setText(totall+" BDT");
 
 
+
+      sub = value;
+      totalll = subtotal+50;
+
+      dis = discountt;
     }
 
     public void confirmorderId(View view) {
 
-        Intent intent = new Intent(getApplicationContext(),RegistrationActivity.class);
-        startActivity(intent);
+        String name = sharedPreferance.getName();
+
+
+
+
+        if (name.equals("none")){
+            Intent intent = new Intent(getApplicationContext(),RegistrationActivity.class);
+          //  intent.putExtra("ordernum",ordernumber);
+            startActivity(intent);
+        }else {
+
+            Intent intent = new Intent(getApplicationContext(),DeliveryActivity.class);
+
+            intent.putExtra("subtotall", sub);
+            intent.putExtra("discountt", dis);
+            intent.putExtra("totall", totalll);
+            startActivity(intent);
+
+        }
+
+
     }
+
+
 
     /*@Override
     public void onBackPressed() {

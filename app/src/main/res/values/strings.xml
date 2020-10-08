@@ -10,4 +10,24 @@
     <string name="fb_login_protocol_scheme">fb348753663233426</string>
 
 
+    <string-array name="pickatime">
+        <item>Pick a time</item>
+        <item>8:00 AM to 9:00 AM</item>
+        <item>9:00 AM to 10:00 AM</item>
+        <item>10:00 AM to 11:00 AM</item>
+        <item>11:00 AM to 12:00 PM</item>
+        <item>12:00 PM to 1:00 PM</item>
+        <item>1:00 PM to 2:00 PM</item>
+        <item>2:00 PM to 3:00 PM</item>
+        <item>3:00 PM to 4:00 PM</item>
+        <item>4:00 PM to 5:00 PM</item>
+        <item>5:00 PM to 6:00 PM</item>
+        <item>6:00 PM to 7:00 PM</item>
+        <item>7:00 PM to 8:00 PM</item>
+        <item>8:00 PM to 9:00 PM</item>
+        <item>9:00 PM to 10:00 PM</item>
+
+
+    </string-array>
+
 </resources>

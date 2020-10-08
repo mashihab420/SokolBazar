@@ -64,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                         sharedPreferance.setPhone(response.body().getPhone());
                         sharedPreferance.setAddress(response.body().getAddress());
 
-                        Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
+                        Intent intent = new Intent(LoginActivity.this, DeliveryActivity.class);
                         // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                     }else {

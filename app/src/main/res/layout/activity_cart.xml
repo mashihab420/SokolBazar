@@ -121,7 +121,7 @@
                 android:fontFamily="@font/montserrat"
                 android:paddingTop="10dp"
                 android:onClick="confirmorderId"
-                android:text="CONFIRM ORDER"
+                android:text="ORDER NOW"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="18sp"
