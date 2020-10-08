@@ -37,6 +37,9 @@ public interface ApiInterface {
     @POST("insert_user_info.php")
     Call<ModelUsers> addUsers(@Body ModelUsers modelUsers);
 
+    @POST("update_user_info.php")
+    Call<ModelUsers> updateUserInfo(@Body ModelUsers modelUsers);
+
     @POST("user_order_insert.php")
     Call<ModelOrderProduct> userOrderInsert(@Body ModelOrderProduct modelOrderProduct);
 

@@ -29,6 +29,10 @@ public class ModelUsers {
     @Expose
     private String response;
 
+    @SerializedName("message")
+    @Expose
+    private String Message;
+
     public String getId() {
         return id;
     }
@@ -75,5 +79,13 @@ public class ModelUsers {
 
     public void setResponse(String response) {
         this.response = response;
+    }
+
+    public String getMessage() {
+        return Message;
+    }
+
+    public void setMessage(String message) {
+        Message = message;
     }
 }

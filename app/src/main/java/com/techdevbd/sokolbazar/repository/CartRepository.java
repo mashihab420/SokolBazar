@@ -84,7 +84,7 @@ public class CartRepository {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            Toast.makeText(context, "Data Updated", Toast.LENGTH_SHORT).show();
+         //   Toast.makeText(context, "Data Updated", Toast.LENGTH_SHORT).show();
         }
     }
 

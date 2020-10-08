@@ -6,10 +6,15 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,11 +23,18 @@ import com.techdevbd.sokolbazar.MysharedPreferance;
 import com.techdevbd.sokolbazar.R;
 import com.techdevbd.sokolbazar.adapter.CartAdapter;
 import com.techdevbd.sokolbazar.model.ModelCartRoom;
+import com.techdevbd.sokolbazar.model.ModelUsers;
 import com.techdevbd.sokolbazar.repository.CartRepository;
+import com.techdevbd.sokolbazar.retrofit.ApiClient;
+import com.techdevbd.sokolbazar.retrofit.ApiInterface;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CartActivity extends AppCompatActivity implements OnDataSend{
 
@@ -40,12 +52,15 @@ public class CartActivity extends AppCompatActivity implements OnDataSend{
     String sub;
     int totalll;
     String dis;
+    Dialog dialog;
+    ApiInterface apiInterface;
 MysharedPreferance sharedPreferance;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
+        dialog = new Dialog(this);
         constraintLayout = findViewById(R.id.subtotallayout);
         address = findViewById(R.id.textView6);
         emptyimage = findViewById(R.id.empty_cartimg);
@@ -53,7 +68,10 @@ MysharedPreferance sharedPreferance;
         subtotal = findViewById(R.id.textView12);
         discount = findViewById(R.id.textView13);
         total = findViewById(R.id.textView15);
+
+        apiInterface = ApiClient.getApiInterface();
         sharedPreferance = MysharedPreferance.getPreferences(getApplicationContext());
+
         arrayList = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerView);
 
@@ -165,6 +183,67 @@ MysharedPreferance sharedPreferance;
         }
 
 
+    }
+
+    public void editAddressBtn(View view) {
+        String phone = sharedPreferance.getPhone();
+
+        if (phone.equals("none")){
+            Toast.makeText(getApplicationContext(), "You must login to edit address!", Toast.LENGTH_SHORT).show();
+        }else {
+
+            openDialog();
+
+        }
+
+    }
+
+    private void openDialog() {
+        dialog.setContentView(R.layout.dialog_layout);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        
+        ImageView imageViewClose = dialog.findViewById(R.id.imageView2);
+        TextView update = dialog.findViewById(R.id.button3);
+        EditText editText = dialog.findViewById(R.id.editTextTextPersonName8);
+        
+        imageViewClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // dialog.dismiss();
+                String addresss = editText.getText().toString();
+                String phone = sharedPreferance.getPhone();
+                sharedPreferance.setAddress(addresss);
+                address.setText(addresss);
+                ModelUsers modelUsers = new ModelUsers();
+                modelUsers.setPhone(phone);
+                modelUsers.setAddress(addresss);
+
+                apiInterface.updateUserInfo(modelUsers).enqueue(new Callback<ModelUsers>() {
+                    @Override
+                    public void onResponse(Call<ModelUsers> call, Response<ModelUsers> response) {
+                        Toast.makeText(CartActivity.this, ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+
+                    @Override
+                    public void onFailure(Call<ModelUsers> call, Throwable t) {
+
+                    }
+                });
+
+
+
+            }
+        });
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
     }
 
 

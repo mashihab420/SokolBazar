@@ -127,7 +127,7 @@ public class DeliveryActivity extends AppCompatActivity {
                             modelOrderProduct.setQuantity(Integer.parseInt(modelCartRooms.get(i).getQuantity()));
                             modelOrderProduct.setInvoice_number(ordernumberselfservice);
                             modelOrderProduct.setPrice(Integer.parseInt(modelCartRooms.get(i).getP_price()));
-                            modelOrderProduct.setShop_name("shop set kora lagbe room database a");
+                            modelOrderProduct.setShop_name(modelCartRooms.get(i).getC_logo());
                             modelOrderProduct.setSubtotal(subtotal);
                             modelOrderProduct.setDiscount(discount);
                             modelOrderProduct.setTotal(""+total);
@@ -202,14 +202,13 @@ public class DeliveryActivity extends AppCompatActivity {
                     for (i = 0; i < arrayList.size(); i++) {
 
                         String phone = sharedPreferance.getPhone();
-
                         ModelOrderProduct modelOrderProduct = new ModelOrderProduct();
                         modelOrderProduct.setPhone(phone);
                         modelOrderProduct.setProduct_name(modelCartRooms.get(i).getP_name());
                         modelOrderProduct.setQuantity(Integer.parseInt(modelCartRooms.get(i).getQuantity()));
                         modelOrderProduct.setInvoice_number(ordernumberselfservice);
                         modelOrderProduct.setPrice(Integer.parseInt(modelCartRooms.get(i).getP_price()));
-                        modelOrderProduct.setShop_name("shop set kora lagbe room database a");
+                        modelOrderProduct.setShop_name(modelCartRooms.get(i).getC_logo());
                         modelOrderProduct.setSubtotal(subtotal);
                         modelOrderProduct.setDiscount(discount);
                         modelOrderProduct.setTotal(""+total);
@@ -228,7 +227,7 @@ public class DeliveryActivity extends AppCompatActivity {
                                 } else {
                                     Toast.makeText(DeliveryActivity.this, "Order Not Confirmed", Toast.LENGTH_SHORT).show();
                                 }
-                                //Toast.makeText(DeliveryActivity.this, ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
+
                             }
 
                             @Override
