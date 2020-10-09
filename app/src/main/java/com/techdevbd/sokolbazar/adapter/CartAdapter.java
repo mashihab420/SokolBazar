@@ -37,6 +37,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
     int distotal = 0;
     int distaka = 0;
     int offer;
+    int totaldiscount=0;
 
     int dispercent;
 
@@ -118,7 +119,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         //subtotal calculation start
        quantity = Integer.parseInt(cart.get(position).getQuantity());
         taka = (Integer.parseInt(cart.get(position).getP_price())) * quantity;
-        Log.d("taka", ""+taka);
+       // Log.d("taka", ""+taka);
        total = total + taka;
         //subtotal calculation end
 
@@ -130,10 +131,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         distaka = (Integer.parseInt(cart.get(position).getP_price())) * disquantity;
 
         distaka = ((Integer.parseInt(cart.get(position).getP_price())) * disquantity)-((offer*(Integer.parseInt(cart.get(position).getP_price())))/100)*disquantity;
-        Log.d("taka", ""+distaka);
+
         distotal = distotal + distaka;
+        Log.d("taka", ""+distaka);
         //discount calculation end
 
+            totaldiscount = total - distotal;
 
          dispercent= (100*(total-distotal))/total;
 
@@ -299,7 +302,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         });
 
 
-        dataSend.totalPrice("" + distotal,""+dispercent);
+        dataSend.totalPrice("" + total,""+totaldiscount);
       //  dataSend.totalPrice("" + positonnn);
 
 

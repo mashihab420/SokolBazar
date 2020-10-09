@@ -131,6 +131,8 @@ public class DeliveryActivity extends AppCompatActivity {
                         String discount = intent.getStringExtra("discountt");
                         int total = intent.getIntExtra("totall",0);
 
+                        int totall = total+50;
+
                         for (i = 0; i < arrayList.size(); i++) {
 
                             String phone = sharedPreferance.getPhone();
@@ -148,7 +150,7 @@ public class DeliveryActivity extends AppCompatActivity {
                             modelOrderProduct.setShop_name(modelCartRooms.get(i).getC_logo());
                             modelOrderProduct.setSubtotal(subtotal);
                             modelOrderProduct.setDiscount(discount);
-                            modelOrderProduct.setTotal(""+total);
+                            modelOrderProduct.setTotal(""+totall);
                             modelOrderProduct.setImage_url(modelCartRooms.get(i).getUrl());
                             modelOrderProduct.setDelivery_time(spinnertext);
                             modelOrderProduct.setDelivery_type("Home Delivery");
@@ -164,6 +166,9 @@ public class DeliveryActivity extends AppCompatActivity {
                                         intent.putExtra("order_id",ordernumberselfservice);
                                         intent.putExtra("phone",phone);
                                         intent.putExtra("delivery_type","Home Delivery");
+                                        intent.putExtra("subtotall",subtotal);
+                                        intent.putExtra("discountt",discount);
+                                        intent.putExtra("totall",totall);
                                         startActivity(intent);
 
 
@@ -195,7 +200,7 @@ public class DeliveryActivity extends AppCompatActivity {
                         }
 
 
-                       Toast.makeText(DeliveryActivity.this, "Order confirmed", Toast.LENGTH_SHORT).show();
+                      // Toast.makeText(DeliveryActivity.this, "Order confirmed", Toast.LENGTH_SHORT).show();
 
 
                     }
@@ -206,6 +211,7 @@ public class DeliveryActivity extends AppCompatActivity {
             }
 
         } else {
+
 
 
             repository.getAllData().observe(this, new Observer<List<ModelCartRoom>>() {
@@ -253,6 +259,9 @@ public class DeliveryActivity extends AppCompatActivity {
                                     intent.putExtra("order_id",ordernumberselfservice);
                                     intent.putExtra("phone",phone);
                                     intent.putExtra("delivery_type","Self Service");
+                                    intent.putExtra("subtotall",subtotal);
+                                    intent.putExtra("discountt",discount);
+                                    intent.putExtra("totall",total);
                                     startActivity(intent);
 
                                 } else {

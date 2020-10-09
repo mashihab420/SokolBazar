@@ -25,7 +25,7 @@ public class CategoryActivity extends AppCompatActivity {
     AllCategoryAdapter allCategoryAdapter;
     List<ModelProducts> product;
     RecyclerView recyclerView;
-    ImageView cartlogo;
+    ImageView cartlogo,backicon;
 
 
     @Override
@@ -37,6 +37,7 @@ public class CategoryActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerViewid);
         cartlogo = findViewById(R.id.cartidd);
+        backicon = findViewById(R.id.backiconid);
 
         product = new ArrayList<>();
         allCategoryAdapter = new AllCategoryAdapter(product,this);
@@ -48,6 +49,13 @@ public class CategoryActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(CategoryActivity.this,CartActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        backicon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
 

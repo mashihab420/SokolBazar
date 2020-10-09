@@ -31,9 +31,9 @@ import androidmads.library.qrgenearator.QRGEncoder;
 
 public class ConfirmOrderActivity extends AppCompatActivity {
 
-    TextView orderidTextview,qrcodeforshopping,ordernumber,invoiceid,deliverytypee;
-    ImageView imageView;
-    Button button;
+    TextView orderidTextview,qrcodeforshopping,ordernumber,invoiceid,deliverytypee,subtotall,discountt,totalll,deliverytaka;
+    ImageView imageView,backiconbt;
+    Button button,mainmenu;
     OutputStream outputStream;
     RelativeLayout relativeLayout = null;
     @Override
@@ -46,18 +46,41 @@ public class ConfirmOrderActivity extends AppCompatActivity {
         qrcodeforshopping = findViewById(R.id.textView24);
         invoiceid = findViewById(R.id.invoiceid);
         button = findViewById(R.id.button2);
+        mainmenu = findViewById(R.id.mainmenu_when_homedelivery);
         deliverytypee = findViewById(R.id.textView23);
+        backiconbt = findViewById(R.id.backicon);
+        deliverytaka = findViewById(R.id.deliveryfeeid);
 
         relativeLayout = findViewById(R.id.relativeLayout1);
         orderidTextview = findViewById(R.id.orderidtv);
+
+        subtotall = findViewById(R.id.subtotalid);
+        discountt = findViewById(R.id.discountid);
+        totalll = findViewById(R.id.totalid);
 
         Intent intent = getIntent();
         String orderid = intent.getStringExtra("order_id");
         String phone = intent.getStringExtra("phone");
         String deliverytype = intent.getStringExtra("delivery_type");
 
+        String subtotal = intent.getStringExtra("subtotall");
+        String discount = intent.getStringExtra("discountt");
+        int total = intent.getIntExtra("totall",0);
 
-        orderidTextview.setText("Order #"+orderid);
+        subtotall.setText(subtotal+" BDT");
+        discountt.setText(discount+" BDT");
+        totalll.setText(total+" BDT");
+
+
+        if (deliverytype.equals("Home Delivery")){
+            deliverytaka.setText("50 BDT");
+            mainmenu.setVisibility(View.VISIBLE);
+        }else {
+            deliverytaka.setText("0 BDT");
+            mainmenu.setVisibility(View.GONE);
+        }
+
+        orderidTextview.setText("Order");
         ordernumber.setText("Order number #"+orderid);
 
         deliverytypee.setText(deliverytype);
@@ -89,6 +112,13 @@ public class ConfirmOrderActivity extends AppCompatActivity {
             button.setVisibility(View.GONE);
         }
 
+
+        backiconbt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
 
     }
@@ -141,5 +171,38 @@ public class ConfirmOrderActivity extends AppCompatActivity {
     public void savebtn(View view) {
 
         saveimage();
+        Intent intent = new Intent(ConfirmOrderActivity.this,MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Intent intent = getIntent();
+        String deliverytype = intent.getStringExtra("delivery_type");
+
+
+        if (deliverytype.equals("Self Service")){
+            saveimage();
+            intent = new Intent(ConfirmOrderActivity.this,CartActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        }else {
+
+            intent = new Intent(ConfirmOrderActivity.this,CartActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        }
+
+
+    }
+
+    public void mainmenu_HD(View view) {
+
+        Intent intent = new Intent(ConfirmOrderActivity.this,MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

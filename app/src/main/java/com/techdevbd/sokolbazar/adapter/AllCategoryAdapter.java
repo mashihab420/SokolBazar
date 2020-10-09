@@ -88,6 +88,7 @@ public class AllCategoryAdapter extends RecyclerView.Adapter<AllCategoryAdapter.
                 intent.putExtra("offers",offer);
                 intent.putExtra("url",url);
                 intent.putExtra("shopname",shopname);
+                intent.putExtra("activity","categories");
 
                 context.startActivity(intent);
             }

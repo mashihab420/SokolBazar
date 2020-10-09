@@ -8,12 +8,17 @@ import androidx.core.view.GravityCompat;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,10 +27,15 @@ import com.techdevbd.sokolbazar.R;
 import com.techdevbd.sokolbazar.databinding.ActivityMainBinding;
 import com.techdevbd.sokolbazar.fragment.FragmentHome;
 import com.techdevbd.sokolbazar.model.ModelCartRoom;
+import com.techdevbd.sokolbazar.model.ModelUsers;
 import com.techdevbd.sokolbazar.repository.CartRepository;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener , View.OnClickListener {
     private static String TAG="MainActivity";
@@ -38,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ActionBarDrawerToggle actionBarDrawerToggle;
     MysharedPreferance sharedPreferance;
     CartRepository repository;
-
+    Dialog dialog;
     boolean flip = false;
 
     @Override
@@ -65,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         actionBarDrawerToggle.getDrawerArrowDrawable().setColor(getColor(R.color.black));
 
 
-
+        dialog = new Dialog(this);
         binding.drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
@@ -237,5 +247,45 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        openDialog();
+    }
+
+    private void openDialog() {
+        dialog.setContentView(R.layout.dialog_main_layout);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        ImageView imageViewClose = dialog.findViewById(R.id.imageView5);
+        TextView no = dialog.findViewById(R.id.button6);
+        TextView ok = dialog.findViewById(R.id.button7);
+
+        imageViewClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 dialog.dismiss();
+
+            }
+        });
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              // onBackPressed();
+               MainActivity.super.onBackPressed();
+               dialog.dismiss();
+            }
+        });
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
     }
 }

@@ -30,6 +30,7 @@ public class ProductDetails extends AppCompatActivity {
         String offers = intent.getStringExtra("offers");
         String urll = intent.getStringExtra("url");
         String shopname = intent.getStringExtra("shopname");
+        String activitytag = intent.getStringExtra("activity");
 
         Glide
                 .with(getApplicationContext())
@@ -52,10 +53,11 @@ public class ProductDetails extends AppCompatActivity {
         binding.backicond.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ProductDetails.this, MainActivity.class);
+               /* Intent intent = new Intent(ProductDetails.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
-                finish();
+                finish();*/
+               onBackPressed();
             }
         });
 

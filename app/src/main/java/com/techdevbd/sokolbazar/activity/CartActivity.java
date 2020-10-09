@@ -51,7 +51,8 @@ public class CartActivity extends AppCompatActivity implements OnDataSend{
     int totall;
     String sub;
     int totalll;
-    String dis;
+    String discounttaka;
+    int dis=0;
     Dialog dialog;
     ApiInterface apiInterface;
 MysharedPreferance sharedPreferance;
@@ -143,21 +144,25 @@ MysharedPreferance sharedPreferance;
     @Override
     public void totalPrice(String value,String discountt) {
         subtotal.setText(value+" BDT");
-        discount.setText(discountt+"%");
+        discount.setText(discountt+" BDT");
         int subtotal = Integer.parseInt(value);
 
+        int subtotall = Integer.parseInt(value);
+       dis = Integer.parseInt(discountt);
+       discounttaka = discountt;
 
+      int disprice =  subtotall - dis;
 
-       totall = subtotal+50;
+       totall = disprice;
 
       total.setText(totall+" BDT");
 
 
 
       sub = value;
-      totalll = subtotal+50;
+      totalll = disprice;
 
-      dis = discountt;
+
     }
 
     public void confirmorderId(View view) {
@@ -176,7 +181,7 @@ MysharedPreferance sharedPreferance;
             Intent intent = new Intent(getApplicationContext(),DeliveryActivity.class);
 
             intent.putExtra("subtotall", sub);
-            intent.putExtra("discountt", dis);
+            intent.putExtra("discountt", discounttaka);
             intent.putExtra("totall", totalll);
             startActivity(intent);
 
