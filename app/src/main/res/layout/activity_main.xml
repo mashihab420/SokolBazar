@@ -67,15 +67,15 @@
                 android:focusable="true"
                 android:textSize="@dimen/nav_item_text_size"
                 android:layout_marginBottom="@dimen/nav_item_bottom_margin"
-                app:layout_constraintBottom_toTopOf="@+id/additem"
+                app:layout_constraintBottom_toTopOf="@+id/ordersitem"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/additem"
+                android:id="@+id/ordersitem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Add Item"
+                android:text="Orders"
                 android:textSize="@dimen/nav_item_text_size"
                 android:clickable="true"
                 android:focusable="true"
@@ -98,7 +98,7 @@
                 android:layout_marginTop="@dimen/nav_item_top_margin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/additem" />
+                app:layout_constraintTop_toBottomOf="@+id/ordersitem" />
 
             <TextView
                 android:id="@+id/setting"

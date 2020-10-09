@@ -17,6 +17,10 @@ import android.widget.Toast;
 
 import com.techdevbd.sokolbazar.R;
 import com.techdevbd.sokolbazar.SingleMediaScanner;
+import com.techdevbd.sokolbazar.model.ModelCartRoom;
+import com.techdevbd.sokolbazar.model.ModelOrdersRoom;
+import com.techdevbd.sokolbazar.repository.CartRepository;
+import com.techdevbd.sokolbazar.repository.OrdersRepository;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -65,6 +69,8 @@ public class ConfirmOrderActivity extends AppCompatActivity {
 
         String subtotal = intent.getStringExtra("subtotall");
         String discount = intent.getStringExtra("discountt");
+
+
         int total = intent.getIntExtra("totall",0);
 
         subtotall.setText(subtotal+" BDT");
@@ -153,7 +159,7 @@ public class ConfirmOrderActivity extends AppCompatActivity {
         }
 
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
-        Toast.makeText(getApplicationContext(), "QR Code Save to Internal Storage", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "QR Code Save to Internal Storage", Toast.LENGTH_SHORT).show();
         try {
             outputStream.flush();
         } catch (IOException e) {
@@ -171,7 +177,14 @@ public class ConfirmOrderActivity extends AppCompatActivity {
     public void savebtn(View view) {
 
         saveimage();
-        Intent intent = new Intent(ConfirmOrderActivity.this,MainActivity.class);
+        final OrdersRepository repository = new OrdersRepository(getApplicationContext());
+        Intent intent = getIntent();
+        String orderid = intent.getStringExtra("order_id");
+        String phone = intent.getStringExtra("phone");
+        String deliverytype = intent.getStringExtra("delivery_type");
+        String datetime = intent.getStringExtra("orderdate");
+        repository.insertSingleData(new ModelOrdersRoom(phone,orderid,datetime,deliverytype));
+        intent = new Intent(ConfirmOrderActivity.this,MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }

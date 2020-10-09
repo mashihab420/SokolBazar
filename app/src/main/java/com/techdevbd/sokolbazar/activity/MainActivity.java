@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         binding.navigationView.setNavigationItemSelectedListener(this);
 
         binding.hideNav.setOnClickListener(this);
-        binding.additem.setOnClickListener(this);
+        binding.ordersitem.setOnClickListener(this);
         binding.category.setOnClickListener(this);
         binding.home.setOnClickListener(this);
         binding.logout.setOnClickListener(this);
@@ -216,8 +216,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.hide_nav:
                 binding.drawerLayout.closeDrawer(GravityCompat.START);
                 break;
-            case R.id.additem:
-
+            case R.id.ordersitem:
+                binding.drawerLayout.closeDrawer(GravityCompat.START);
+                Intent intent = new Intent(MainActivity.this,OrdersActivity.class);
+                startActivity(intent);
                 break;
             case R.id.profile:
                 binding.drawerLayout.closeDrawer(GravityCompat.START);

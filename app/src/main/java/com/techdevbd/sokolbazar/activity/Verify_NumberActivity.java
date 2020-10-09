@@ -175,7 +175,15 @@ public class Verify_NumberActivity extends AppCompatActivity {
 
                             sendData(modelUsers);
 
-                            Intent intent = new Intent(Verify_NumberActivity.this,DeliveryActivity.class);
+                            Intent intent = getIntent();
+                            String subtotal = intent.getStringExtra("subtotall");
+                            String discount = intent.getStringExtra("discountt");
+                            int total = intent.getIntExtra("totall",0);
+
+                            intent = new Intent(Verify_NumberActivity.this,DeliveryActivity.class);
+                            intent.putExtra("subtotall", subtotal);
+                            intent.putExtra("discountt", discount);
+                            intent.putExtra("totall", total);
                             startActivity(intent);
 
 

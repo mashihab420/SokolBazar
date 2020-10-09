@@ -63,89 +63,10 @@ public class RegistrationActivity extends AppCompatActivity {
         password = findViewById(R.id.editTextTextPersonName5);
 
         apiInterface = ApiClient.getApiInterface();
-       // imageView = findViewById(R.id.imageviewid);
 
-     //   loginButton = findViewById(R.id.login_button);
-
-     //   callbackManager = CallbackManager.Factory.create();
-
-        //loginButton.setPermissions(Arrays.asList("user_location"));
-
-   /*     loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                Log.d("demo","Login successful");
-                phone.setText(loginResult.getAccessToken().getUserId());
-                url = "https//graph.facebook.com/"+ loginResult.getAccessToken().getUserId() + "/picture?return_ssl_resources=1";
-            }
-
-            @Override
-            public void onCancel() {
-                Log.d("demo","Login canceled");
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-
-            }
-        });*/
 
     }
 
-
-/*    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        callbackManager.onActivityResult(requestCode, resultCode, data);
-        super.onActivityResult(requestCode, resultCode, data);
-
-        GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(),
-                new GraphRequest.GraphJSONObjectCallback() {
-                    @Override
-                    public void onCompleted(JSONObject object, GraphResponse response) {
-                        try{
-                            String namee = object.getString("name");
-                            String id = object.getString("id");
-
-                            name.setText(namee);
-                         //   phone.setText(id);
-
-
-                            Glide
-                                    .with(getApplicationContext())
-                                   // .load("https://www.facebook.com/photo?fbid=3186694394789401&set=a."+id)
-                                    .load(url)
-                                    .into(imageView);
-
-                        }catch (Exception e)
-                        {
-                            e.printStackTrace();
-                        }
-
-                    }
-                });
-        Bundle bundle = new Bundle();
-        bundle.putString("fields","gender, name, first_name,last_name");
-        graphRequest.setParameters(bundle);
-        graphRequest.executeAsync();
-
-    }*/
-
-  /*  AccessTokenTracker accessTokenTracker = new AccessTokenTracker() {
-        @Override
-        protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
-           if (currentAccessToken==null)
-           {
-               LoginManager.getInstance().logOut();
-               imageView.setImageResource(0);
-           }
-        }
-    };*/
-
-    /*@Override
-    protected void onDestroy() {
-        super.onDestroy();
-        accessTokenTracker.startTracking();
-    }*/
 
     public static boolean validateLetters(String txt) {
 
@@ -223,11 +144,20 @@ public class RegistrationActivity extends AppCompatActivity {
 
                    // sign_up_progress.setVisibility(View.GONE);
                   //  create.setVisibility(View.VISIBLE);
-                    Intent  intent=new Intent(getApplicationContext(), Verify_NumberActivity.class);
+                    Intent intent = getIntent();
+                    String subtotal = intent.getStringExtra("subtotall");
+                    String discount = intent.getStringExtra("discountt");
+                    int total = intent.getIntExtra("totall",0);
+
+                    intent=new Intent(getApplicationContext(), Verify_NumberActivity.class);
                     intent.putExtra("name",name.getText().toString());
                     intent.putExtra("phone",phone.getText().toString());
                     intent.putExtra("password",password.getText().toString());
                     intent.putExtra("address",address.getText().toString());
+
+                    intent.putExtra("subtotall", subtotal);
+                    intent.putExtra("discountt", discount);
+                    intent.putExtra("totall", total);
 
                     startActivity(intent);
 
@@ -262,7 +192,17 @@ public class RegistrationActivity extends AppCompatActivity {
 
     public void loginbutton(View view) {
 
-        Intent intent = new Intent(RegistrationActivity.this,LoginActivity.class);
+        Intent intent = getIntent();
+        String subtotal = intent.getStringExtra("subtotall");
+        String discount = intent.getStringExtra("discountt");
+        int total = intent.getIntExtra("totall",0);
+
+
+
+        intent = new Intent(RegistrationActivity.this,LoginActivity.class);
+        intent.putExtra("subtotall", subtotal);
+        intent.putExtra("discountt", discount);
+        intent.putExtra("totall", total);
         startActivity(intent);
 
     }

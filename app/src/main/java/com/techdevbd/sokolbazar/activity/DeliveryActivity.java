@@ -169,6 +169,7 @@ public class DeliveryActivity extends AppCompatActivity {
                                         intent.putExtra("subtotall",subtotal);
                                         intent.putExtra("discountt",discount);
                                         intent.putExtra("totall",totall);
+                                        intent.putExtra("orderdate",formattedDate);
                                         startActivity(intent);
 
 
@@ -232,7 +233,7 @@ public class DeliveryActivity extends AppCompatActivity {
                     for (i = 0; i < arrayList.size(); i++) {
 
                         String phone = sharedPreferance.getPhone();
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yy hh.mm.ss aa");
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yy      hh.mm.ss aa");
                         String formattedDate = dateFormat.format(new Date()).toString();
 
                         ModelOrderProduct modelOrderProduct = new ModelOrderProduct();
@@ -262,6 +263,7 @@ public class DeliveryActivity extends AppCompatActivity {
                                     intent.putExtra("subtotall",subtotal);
                                     intent.putExtra("discountt",discount);
                                     intent.putExtra("totall",total);
+                                    intent.putExtra("orderdate",formattedDate);
                                     startActivity(intent);
 
                                 } else {

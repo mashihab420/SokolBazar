@@ -64,8 +64,16 @@ public class LoginActivity extends AppCompatActivity {
                         sharedPreferance.setPhone(response.body().getPhone());
                         sharedPreferance.setAddress(response.body().getAddress());
 
-                        Intent intent = new Intent(LoginActivity.this, DeliveryActivity.class);
+                        Intent intent = getIntent();
+                        String subtotal = intent.getStringExtra("subtotall");
+                        String discount = intent.getStringExtra("discountt");
+                        int total = intent.getIntExtra("totall",0);
+
+                         intent = new Intent(LoginActivity.this, DeliveryActivity.class);
                         // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        intent.putExtra("subtotall", subtotal);
+                        intent.putExtra("discountt", discount);
+                        intent.putExtra("totall", total);
                         startActivity(intent);
                     }else {
                         View parentLayout = findViewById(android.R.id.content);

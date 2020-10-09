@@ -55,7 +55,7 @@ public class CartActivity extends AppCompatActivity implements OnDataSend{
     int dis=0;
     Dialog dialog;
     ApiInterface apiInterface;
-MysharedPreferance sharedPreferance;
+    MysharedPreferance sharedPreferance;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -174,7 +174,9 @@ MysharedPreferance sharedPreferance;
 
         if (name.equals("none")){
             Intent intent = new Intent(getApplicationContext(),RegistrationActivity.class);
-          //  intent.putExtra("ordernum",ordernumber);
+            intent.putExtra("subtotall", sub);
+            intent.putExtra("discountt", discounttaka);
+            intent.putExtra("totall", totalll);
             startActivity(intent);
         }else {
 
