@@ -47,4 +47,7 @@ public interface ApiInterface {
     @GET("userlogin.php")
     Call<ModelUsers> userlogin(@Query("phone") String phone ,@Query("password") String pass);
 
+    @GET("get_order_status.php")
+    Call<ModelOrderProduct> get_order_status(@Query("invoice_number") String invoiceNumber);
+
 }

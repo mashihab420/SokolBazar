@@ -66,6 +66,14 @@ public class ModelOrderProduct {
     @Expose
     private String 	Message;
 
+    @SerializedName("response")
+    @Expose
+    private String response;
+
+    @SerializedName("invoice_number")
+    @Expose
+    private String InvoiceNumber;
+
     public String getId() {
         return id;
     }
@@ -185,5 +193,22 @@ public class ModelOrderProduct {
 
     public void setEntry_time(String entry_time) {
         Entry_time = entry_time;
+    }
+
+
+    public String getResponse() {
+        return response;
+    }
+
+    public void setResponse(String response) {
+        this.response = response;
+    }
+
+    public String getInvoiceNumber() {
+        return InvoiceNumber;
+    }
+
+    public void setInvoiceNumber(String invoiceNumber) {
+        InvoiceNumber = invoiceNumber;
     }
 }
