@@ -80,10 +80,10 @@ public class ConfirmOrderActivity extends AppCompatActivity {
 
         if (deliverytype.equals("Home Delivery")){
             deliverytaka.setText("50 BDT");
-            mainmenu.setVisibility(View.VISIBLE);
+
         }else {
             deliverytaka.setText("0 BDT");
-            mainmenu.setVisibility(View.GONE);
+
         }
 
         orderidTextview.setText("Order");
@@ -112,10 +112,23 @@ public class ConfirmOrderActivity extends AppCompatActivity {
 
 
         }else {
-           relativeLayout.setVisibility(View.GONE);
-            qrcodeforshopping.setVisibility(View.GONE);
-            imageView.setVisibility(View.GONE);
-            button.setVisibility(View.GONE);
+
+            button.setVisibility(View.VISIBLE);
+
+            String text = orderid+","+phone;
+
+            QRGEncoder qrgEncoder = new QRGEncoder(text,null, QRGContents.Type.TEXT,500);
+            try{
+                Bitmap qrbits = qrgEncoder.getBitmap();
+                imageView.setImageBitmap(qrbits);
+
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+            qrcodeforshopping.setVisibility(View.VISIBLE);
+            imageView.setVisibility(View.VISIBLE);
+
         }
 
 
@@ -196,18 +209,34 @@ public class ConfirmOrderActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String deliverytype = intent.getStringExtra("delivery_type");
 
+        saveimage();
 
-        if (deliverytype.equals("Self Service")){
-            saveimage();
-            intent = new Intent(ConfirmOrderActivity.this,CartActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
+        final OrdersRepository repository = new OrdersRepository(getApplicationContext());
+
+        String orderid = intent.getStringExtra("order_id");
+        String phone = intent.getStringExtra("phone");
+
+        String datetime = intent.getStringExtra("orderdate");
+        repository.insertSingleData(new ModelOrdersRoom(phone,orderid,datetime,deliverytype));
+        intent = new Intent(ConfirmOrderActivity.this,CartActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+
+        /*if (deliverytype.equals("Self Service")){
+
         }else {
+            saveimage();
+            final OrdersRepository repository = new OrdersRepository(getApplicationContext());
 
+            String orderid = intent.getStringExtra("order_id");
+            String phone = intent.getStringExtra("phone");
+
+            String datetime = intent.getStringExtra("orderdate");
+            repository.insertSingleData(new ModelOrdersRoom(phone,orderid,datetime,deliverytype));
             intent = new Intent(ConfirmOrderActivity.this,CartActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
-        }
+        }*/
 
 
     }

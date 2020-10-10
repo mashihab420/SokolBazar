@@ -2,6 +2,7 @@ package com.techdevbd.sokolbazar.retrofit;
 
 
 import com.techdevbd.sokolbazar.model.ModelOrderProduct;
+import com.techdevbd.sokolbazar.model.ModelOrdersRoom;
 import com.techdevbd.sokolbazar.model.ModelProducts;
 import com.techdevbd.sokolbazar.model.ModelUsers;
 
@@ -47,7 +48,7 @@ public interface ApiInterface {
     @GET("userlogin.php")
     Call<ModelUsers> userlogin(@Query("phone") String phone ,@Query("password") String pass);
 
-    @GET("get_order_status.php")
-    Call<ModelOrderProduct> get_order_status(@Query("invoice_number") String invoiceNumber);
+    @POST("get_order_status.php")
+    Call<List<ModelOrderProduct>> get_order_status(@Body ModelOrderProduct Product);
 
 }

@@ -22,6 +22,7 @@
             android:id="@+id/backicon"
             android:layout_marginTop="10dp"
             android:layout_marginStart="8dp"
+            android:onClick="backbtniconorder"
             android:src="@drawable/ic_back"
             android:layout_height="24dp"/>
 

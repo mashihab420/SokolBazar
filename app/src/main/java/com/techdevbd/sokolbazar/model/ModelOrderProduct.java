@@ -70,9 +70,11 @@ public class ModelOrderProduct {
     @Expose
     private String response;
 
-    @SerializedName("invoice_number")
+
+    @SerializedName("order_status")
     @Expose
-    private String InvoiceNumber;
+    private String OrderStatus;
+
 
     public String getId() {
         return id;
@@ -204,11 +206,11 @@ public class ModelOrderProduct {
         this.response = response;
     }
 
-    public String getInvoiceNumber() {
-        return InvoiceNumber;
+    public String getOrderStatus() {
+        return OrderStatus;
     }
 
-    public void setInvoiceNumber(String invoiceNumber) {
-        InvoiceNumber = invoiceNumber;
+    public void setOrderStatus(String orderStatus) {
+        OrderStatus = orderStatus;
     }
 }

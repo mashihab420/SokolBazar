@@ -78,4 +78,13 @@ public class OrdersActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    public void backbtniconorder(View view) {
+        onBackPressed();
+    }
 }
