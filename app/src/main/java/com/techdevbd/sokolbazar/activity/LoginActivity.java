@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText phone,pass;
     ApiInterface apiInterface;
     MysharedPreferance sharedPreferance;
+    ImageView backbt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +37,16 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         phone = findViewById(R.id.editTextTextPersonName6);
         pass = findViewById(R.id.editTextTextPersonName7);
+        backbt = findViewById(R.id.backicon);
         apiInterface = ApiClient.getApiInterface();
         sharedPreferance = MysharedPreferance.getPreferences(getApplicationContext());
+
+        backbt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     public void loginuserButton(View view) {
@@ -112,5 +122,16 @@ public class LoginActivity extends AppCompatActivity {
         
         
         
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    public void gotoRegPage(View view) {
+       Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

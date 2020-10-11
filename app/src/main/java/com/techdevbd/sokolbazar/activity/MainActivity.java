@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       binding.login.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
+               binding.drawerLayout.closeDrawer(GravityCompat.START);
                binding.login.setVisibility(View.GONE);
                binding.logout.setVisibility(View.VISIBLE);
                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
@@ -127,6 +128,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       binding.logout.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
+               binding.drawerLayout.closeDrawer(GravityCompat.START);
                binding.login.setVisibility(View.VISIBLE);
                binding.logout.setVisibility(View.GONE);
 

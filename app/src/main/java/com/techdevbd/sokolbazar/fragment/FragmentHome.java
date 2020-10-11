@@ -381,19 +381,6 @@ public class FragmentHome extends Fragment implements ZXingScannerView.ResultHan
     @Override
     public void handleResult(Result result) {
 
-       /* new CountDownTimer(2000, 1000) {
-            public void onFinish() {
-                // When timer is finished
-                // Execute your code here
-                mScannerView.setResultHandler(FragmentHome.this);
-                mScannerView.startCamera();
-            }
-
-            public void onTick(long millisUntilFinished) {
-                // millisUntilFinished    The amount of time until finished.
-            }
-        }.start();*/
-
         s1 = result.getText();
 
         String[] array = s1.split(",");
@@ -406,9 +393,10 @@ public class FragmentHome extends Fragment implements ZXingScannerView.ResultHan
         String quantity = array[2];
         String offers = array[3];
         String url = array[4];
-        String logo = array[5];
+        String shopname = array[5];
 
-        repository.insertSingleData(new ModelCartRoom(name, price, quantity, offers, url, logo));
+       repository.insertSingleData(new ModelCartRoom(name, price, quantity, offers, url, shopname));
+
 
 
         if (!s1.equals("")) {

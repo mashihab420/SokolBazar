@@ -240,7 +240,7 @@ public class Verify_NumberActivity extends AppCompatActivity {
     }
 
 
-
-
-
+    public void backregpage(View view) {
+        onBackPressed();
+    }
 }

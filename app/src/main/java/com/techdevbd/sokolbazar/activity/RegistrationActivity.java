@@ -206,4 +206,8 @@ public class RegistrationActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+    public void backbtnreg(View view) {
+        onBackPressed();
+    }
 }
