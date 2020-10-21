@@ -123,7 +123,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
        total = total + taka;
         //subtotal calculation end
 
-
+        Log.d("taka", ""+total);
 
        //discount calculation start
         disquantity = Integer.parseInt(cart.get(position).getQuantity());
@@ -133,7 +133,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         distaka = ((Integer.parseInt(cart.get(position).getP_price())) * disquantity)-((offer*(Integer.parseInt(cart.get(position).getP_price())))/100)*disquantity;
 
         distotal = distotal + distaka;
-        Log.d("taka", ""+distaka);
+       // Log.d("taka", ""+distaka);
         //discount calculation end
 
             totaldiscount = total - distotal;

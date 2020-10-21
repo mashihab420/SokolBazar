@@ -100,7 +100,7 @@ public class CartActivity extends AppCompatActivity implements OnDataSend{
             @Override
             public void onChanged(List<ModelCartRoom> modelCartRooms) {
 
-                arrayList.clear();
+               arrayList.clear();
                 arrayList.addAll(modelCartRooms);
                 adapter.notifyDataSetChanged();
 
@@ -177,6 +177,7 @@ public class CartActivity extends AppCompatActivity implements OnDataSend{
             intent.putExtra("subtotall", sub);
             intent.putExtra("discountt", discounttaka);
             intent.putExtra("totall", totalll);
+            intent.putExtra("activity","cart");
             startActivity(intent);
         }else {
 

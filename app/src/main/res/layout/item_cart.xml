@@ -58,7 +58,6 @@
             android:id="@+id/brand_logo_id"
             android:layout_width="120dp"
             android:layout_height="50dp"
-            android:src="@drawable/ic_agora"
             app:layout_constraintBottom_toTopOf="@+id/imageView5"
             app:layout_constraintEnd_toEndOf="parent" />
 

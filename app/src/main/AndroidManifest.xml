@@ -20,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.TrackOrderActivity"></activity>
+        <activity android:name=".activity.SeeAllProductActivity"></activity>
+        <activity android:name=".activity.TrackOrderActivity" />
         <activity android:name=".activity.OrdersActivity" />
         <activity android:name=".activity.ConfirmOrderActivity" />
         <activity android:name=".activity.LoginActivity" />

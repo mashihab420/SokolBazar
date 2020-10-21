@@ -133,12 +133,19 @@ public class DeliveryActivity extends AppCompatActivity {
 
                         int totall = total+50;
 
+
+                        String phone = sharedPreferance.getPhone();
+
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yy hh.mm.ss aa");
+                        String formattedDate = dateFormat.format(new Date()).toString();
+
                         for (i = 0; i < arrayList.size(); i++) {
 
-                            String phone = sharedPreferance.getPhone();
+                            /*  String phone = sharedPreferance.getPhone();
 
                             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yy hh.mm.ss aa");
                             String formattedDate = dateFormat.format(new Date()).toString();
+                           */
 
 
                             ModelOrderProduct modelOrderProduct = new ModelOrderProduct();
@@ -162,7 +169,7 @@ public class DeliveryActivity extends AppCompatActivity {
                                 public void onResponse(Call<ModelOrderProduct> call, Response<ModelOrderProduct> response) {
                                     if (response.isSuccessful()) {
 
-                                        Intent intent = new Intent(DeliveryActivity.this,ConfirmOrderActivity.class);
+                                       /* Intent intent = new Intent(DeliveryActivity.this,ConfirmOrderActivity.class);
                                         intent.putExtra("order_id",ordernumberselfservice);
                                         intent.putExtra("phone",phone);
                                         intent.putExtra("delivery_type","Home Delivery");
@@ -170,7 +177,7 @@ public class DeliveryActivity extends AppCompatActivity {
                                         intent.putExtra("discountt",discount);
                                         intent.putExtra("totall",totall);
                                         intent.putExtra("orderdate",formattedDate);
-                                        startActivity(intent);
+                                        startActivity(intent);*/
 
 
                                     } else {
@@ -201,6 +208,16 @@ public class DeliveryActivity extends AppCompatActivity {
                         }
 
 
+                         intent = new Intent(DeliveryActivity.this,ConfirmOrderActivity.class);
+                        intent.putExtra("order_id",ordernumberselfservice);
+                        intent.putExtra("phone",phone);
+                        intent.putExtra("delivery_type","Home Delivery");
+                        intent.putExtra("subtotall",subtotal);
+                        intent.putExtra("discountt",discount);
+                        intent.putExtra("totall",totall);
+                        intent.putExtra("orderdate",formattedDate);
+                        startActivity(intent);
+
                       // Toast.makeText(DeliveryActivity.this, "Order confirmed", Toast.LENGTH_SHORT).show();
 
 
@@ -229,12 +246,13 @@ public class DeliveryActivity extends AppCompatActivity {
                     String discount = intent.getStringExtra("discountt");
                     int total = intent.getIntExtra("totall",0);
 
+                    String phone = sharedPreferance.getPhone();
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yy      hh.mm.ss aa");
+                    String formattedDate = dateFormat.format(new Date()).toString();
 
                     for (i = 0; i < arrayList.size(); i++) {
 
-                        String phone = sharedPreferance.getPhone();
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yy      hh.mm.ss aa");
-                        String formattedDate = dateFormat.format(new Date()).toString();
+
 
                         ModelOrderProduct modelOrderProduct = new ModelOrderProduct();
                         modelOrderProduct.setPhone(phone);
@@ -256,7 +274,7 @@ public class DeliveryActivity extends AppCompatActivity {
                             public void onResponse(Call<ModelOrderProduct> call, Response<ModelOrderProduct> response) {
                                 if (response.isSuccessful()) {
 
-                                    Intent intent = new Intent(DeliveryActivity.this,ConfirmOrderActivity.class);
+                                    /*Intent intent = new Intent(DeliveryActivity.this,ConfirmOrderActivity.class);
                                     intent.putExtra("order_id",ordernumberselfservice);
                                     intent.putExtra("phone",phone);
                                     intent.putExtra("delivery_type","Self Service");
@@ -264,7 +282,7 @@ public class DeliveryActivity extends AppCompatActivity {
                                     intent.putExtra("discountt",discount);
                                     intent.putExtra("totall",total);
                                     intent.putExtra("orderdate",formattedDate);
-                                    startActivity(intent);
+                                    startActivity(intent);*/
 
                                 } else {
                                     Toast.makeText(DeliveryActivity.this, "Order Not Confirmed", Toast.LENGTH_SHORT).show();
@@ -293,6 +311,16 @@ public class DeliveryActivity extends AppCompatActivity {
 
 
                     }
+
+                    intent = new Intent(DeliveryActivity.this,ConfirmOrderActivity.class);
+                    intent.putExtra("order_id",ordernumberselfservice);
+                    intent.putExtra("phone",phone);
+                    intent.putExtra("delivery_type","Self Service");
+                    intent.putExtra("subtotall",subtotal);
+                    intent.putExtra("discountt",discount);
+                    intent.putExtra("totall",total);
+                    intent.putExtra("orderdate",formattedDate);
+                    startActivity(intent);
 
                   //  Toast.makeText(DeliveryActivity.this, "Order confirmed", Toast.LENGTH_SHORT).show();
 

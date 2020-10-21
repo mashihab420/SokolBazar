@@ -74,17 +74,32 @@ public class LoginActivity extends AppCompatActivity {
                         sharedPreferance.setPhone(response.body().getPhone());
                         sharedPreferance.setAddress(response.body().getAddress());
 
+                        String activitys = "";
                         Intent intent = getIntent();
                         String subtotal = intent.getStringExtra("subtotall");
                         String discount = intent.getStringExtra("discountt");
+                        activitys = intent.getStringExtra("activity");
                         int total = intent.getIntExtra("totall",0);
 
-                         intent = new Intent(LoginActivity.this, DeliveryActivity.class);
-                        // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        intent.putExtra("subtotall", subtotal);
-                        intent.putExtra("discountt", discount);
-                        intent.putExtra("totall", total);
-                        startActivity(intent);
+
+
+
+                        //Toast.makeText(LoginActivity.this, ""+activitys, Toast.LENGTH_SHORT).show();
+                      if (activitys.equals("cart")){
+
+                          intent = new Intent(LoginActivity.this, DeliveryActivity.class);
+                          // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                          intent.putExtra("subtotall", subtotal);
+                          intent.putExtra("discountt", discount);
+                          intent.putExtra("totall", total);
+                          startActivity(intent);
+
+                        }
+                      if(activitys.equals("main")){
+                            intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
+                        }
+
                     }else {
                         View parentLayout = findViewById(android.R.id.content);
                         Snackbar mSnackBar = Snackbar.make(parentLayout, "Incorrect Phone number or Password!", Snackbar.LENGTH_LONG);

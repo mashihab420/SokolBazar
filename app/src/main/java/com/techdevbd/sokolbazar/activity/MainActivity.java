@@ -106,6 +106,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                binding.login.setVisibility(View.GONE);
                binding.logout.setVisibility(View.VISIBLE);
                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+               intent.putExtra("activity","main");
                startActivity(intent);
            }
        });
@@ -225,7 +226,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.profile:
                 binding.drawerLayout.closeDrawer(GravityCompat.START);
-                Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show();
+                 intent = new Intent(MainActivity.this,CartActivity.class);
+                startActivity(intent);
                 break;
             case R.id.setting:
                 binding.drawerLayout.closeDrawer(GravityCompat.START);

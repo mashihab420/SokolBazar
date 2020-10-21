@@ -74,7 +74,6 @@ public class TrackOrderActivity extends AppCompatActivity {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Toast.makeText(TrackOrderActivity.this, "Data relode", Toast.LENGTH_SHORT).show();
                 getData();
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -157,6 +156,29 @@ public class TrackOrderActivity extends AppCompatActivity {
 
                     binding.textView37.setTextColor(Color.parseColor("#FE6268"));
                     binding.textView41.setTextColor(Color.parseColor("#FE6268"));
+
+
+                }
+
+                else if (status.equals("delivered")) {
+
+                    binding.imageCircleGreen2.setVisibility(View.VISIBLE);
+                    binding.imageLineGreen2.setVisibility(View.VISIBLE);
+                    binding.imageCircleGreen3.setVisibility(View.VISIBLE);
+                    binding.imageVerify.setVisibility(View.VISIBLE);
+                    binding.imageLineGreen3.setVisibility(View.VISIBLE);
+
+
+                    binding.textView35.setTextColor(Color.parseColor("#595959"));
+                    binding.textView38.setTextColor(Color.parseColor("#595959"));
+
+                    binding.textView36.setTextColor(Color.parseColor("#595959"));
+                    binding.textView40.setTextColor(Color.parseColor("#595959"));
+
+                    binding.textView37.setTextColor(Color.parseColor("#FE6268"));
+                    binding.textView41.setTextColor(Color.parseColor("#FE6268"));
+
+                    binding.textView32.setText("Order Delivered");
 
 
                 }

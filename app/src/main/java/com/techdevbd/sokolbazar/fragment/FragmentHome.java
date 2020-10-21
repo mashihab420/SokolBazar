@@ -1,7 +1,9 @@
 package com.techdevbd.sokolbazar.fragment;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,6 +28,7 @@ import android.widget.TextView;
 
 import com.techdevbd.sokolbazar.R;
 import com.techdevbd.sokolbazar.activity.MainActivity;
+import com.techdevbd.sokolbazar.activity.SeeAllProductActivity;
 import com.techdevbd.sokolbazar.adapter.AllProductAdapter;
 import com.techdevbd.sokolbazar.adapter.CategoriesAdapter;
 import com.techdevbd.sokolbazar.adapter.OffersAdapter;
@@ -98,6 +101,8 @@ public class FragmentHome extends Fragment implements ZXingScannerView.ResultHan
         initViewModel();
 
 
+
+
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 requestPermissions(new String[]{Manifest.permission.CAMERA}, 5);
@@ -137,6 +142,15 @@ public class FragmentHome extends Fragment implements ZXingScannerView.ResultHan
         });
 
 
+        binding.seeAllProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), SeeAllProductActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
         // dataRetriever();
 
         //get all category
@@ -162,12 +176,57 @@ public class FragmentHome extends Fragment implements ZXingScannerView.ResultHan
         initRecyclerViewSearchproduct(searchAdapter, binding.searchrecyclerid);
 
 
+     //   android:focusableInTouchMode="false"
+
+/*
+searchtextview.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+       */
+/* InputMethodManager inputMethodManager =
+                (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.toggleSoftInputFromWindow(
+                searchtextview.getApplicationWindowToken(),
+                InputMethodManager.SHOW_FORCED, 0);*//*
+
+
+
+        binding.closesearchbr.setVisibility(View.VISIBLE);
+
+        //  binding.moveLayoutId.setVisibility(View.GONE);
+        binding.textView.setVisibility(View.GONE);
+        binding.recyclerCategoryItem.setVisibility(View.GONE);
+        binding.textView2.setVisibility(View.GONE);
+        binding.recyclerOfferItem.setVisibility(View.GONE);
+        binding.textView3.setVisibility(View.GONE);
+        binding.recyclerAllItem.setVisibility(View.GONE);
+        binding.fabId.setVisibility(View.GONE);
+        binding.searchrecyclerid.setVisibility(View.VISIBLE);
+    }
+});
+*/
+
+
+
+
+
 
         searchtextview.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+
+
+              /*  InputMethodManager inputMethodManager =
+                        (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputMethodManager.toggleSoftInputFromWindow(
+                        searchtextview.getApplicationWindowToken(),
+                        InputMethodManager.SHOW_FORCED, 0);*/
+
+
                 binding.closesearchbr.setVisibility(View.VISIBLE);
+
               //  binding.moveLayoutId.setVisibility(View.GONE);
+                binding.seeAllProduct.setVisibility(View.GONE);
                 binding.textView.setVisibility(View.GONE);
                 binding.recyclerCategoryItem.setVisibility(View.GONE);
                 binding.textView2.setVisibility(View.GONE);
@@ -181,7 +240,8 @@ public class FragmentHome extends Fragment implements ZXingScannerView.ResultHan
         });
 
 
-        binding.closesearchbr.setOnTouchListener(new View.OnTouchListener() {
+
+       /* binding.closesearchbr.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
@@ -202,6 +262,26 @@ public class FragmentHome extends Fragment implements ZXingScannerView.ResultHan
 
                 return false;
             }
+        });*/
+
+        binding.closesearchbr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.seeAllProduct.setVisibility(View.VISIBLE);
+                binding.textView.setVisibility(View.VISIBLE);
+                binding.recyclerCategoryItem.setVisibility(View.VISIBLE);
+                binding.textView2.setVisibility(View.VISIBLE);
+                binding.recyclerOfferItem.setVisibility(View.VISIBLE);
+                binding.textView3.setVisibility(View.VISIBLE);
+                binding.recyclerAllItem.setVisibility(View.VISIBLE);
+                binding.fabId.setVisibility(View.VISIBLE);
+                binding.searchrecyclerid.setVisibility(View.GONE);
+                binding.closesearchbr.setVisibility(View.GONE);
+                searchtextview.setText("");
+
+                InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(getContext().INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(searchtextview.getWindowToken(), 0);
+            }
         });
 
 
@@ -219,6 +299,10 @@ public class FragmentHome extends Fragment implements ZXingScannerView.ResultHan
             @Override
             public void afterTextChanged(Editable s) {
 
+               /* if (searchtextview.length()<4 && searchtextview.length()>0){
+                    searchtextview.setError("aro dao");
+                }
+*/
                 product_filter(s.toString());
 
 

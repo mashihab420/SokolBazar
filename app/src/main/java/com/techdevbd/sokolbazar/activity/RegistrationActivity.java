@@ -195,6 +195,7 @@ public class RegistrationActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String subtotal = intent.getStringExtra("subtotall");
         String discount = intent.getStringExtra("discountt");
+        String activitys = intent.getStringExtra("activity");
         int total = intent.getIntExtra("totall",0);
 
 
@@ -203,6 +204,7 @@ public class RegistrationActivity extends AppCompatActivity {
         intent.putExtra("subtotall", subtotal);
         intent.putExtra("discountt", discount);
         intent.putExtra("totall", total);
+        intent.putExtra("activity", activitys);
         startActivity(intent);
 
     }
