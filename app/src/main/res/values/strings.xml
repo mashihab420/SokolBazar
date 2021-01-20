@@ -30,4 +30,18 @@
 
     </string-array>
 
+
+    <string name="icon1"><div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div></string>
+
+    <string name="icon2"><div>Icons made by <a href="https://agorasuperstores.com/" title="Agorasuperstores">Agora</a> from <a href="https://agorasuperstores.com/" title="Agorasuperstores">www.agorasuperstores.com</a></div></string>
+
+    <string name="icon3"><div>Icons made by <a href="https://www.shwapno.com/" title="Shwapno">Shwapno</a> from <a href="https://www.shwapno.com/" title="Shwapno">www.shwapno.com</a></div></string>
+
+    <string name="icon4"><div>Icons made by <a href="https://www.aarong.com/" title="Aarong">Aarong</a> from <a href="https://www.aarong.com/" title="Aarong">www.aarong.com</a></div></string>
+    <string name="icon5"><div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div></string>
+    <string name="icon6"><div>Icons made by <a href="https://www.shutterstock.com/image-photo/fresh-raw-meat-products-isolated-on-394218775" title="shutterstock">Shutterstock</a> from <a href="https://www.shutterstock.com/" title="Shutterstock">www.shutterstock.com</a></div></string>
+    <string name="icon7"><div>Icons made by <a href="https://www.pinterest.com/pin/572801646358372965/" title="Pinterest">Pinterest</a> from <a href="https://www.pinterest.com/" title="Pinterest">www.pinterest.com</a></div></string>
+    <string name="icon8"><div>Icons made by <a href="https://chefcart.com.bd/" title="Chefcart">Chefcart</a> from <a href="https://chefcart.com.bd/" title="Chefcart">www.chefcart.com.bd</a></div></string>
+    <string name="icon9"><div>Icons made by <a href="https://esodai.com.bd/" title="Esodai">Esodai</a> from <a href="https://esodai.com.bd/" title="Esodai">www.esodai.com.bd/</a></div></string>
+
 </resources>

@@ -75,6 +75,9 @@ public class ModelOrderProduct {
     @Expose
     private String OrderStatus;
 
+    @SerializedName("order_otp")
+    @Expose
+    private String OrderOtp;
 
     public String getId() {
         return id;
@@ -212,5 +215,13 @@ public class ModelOrderProduct {
 
     public void setOrderStatus(String orderStatus) {
         OrderStatus = orderStatus;
+    }
+
+    public String getOrderOtp() {
+        return OrderOtp;
+    }
+
+    public void setOrderOtp(String orderOtp) {
+        OrderOtp = orderOtp;
     }
 }

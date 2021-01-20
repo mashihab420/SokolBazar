@@ -16,9 +16,10 @@
         android:layout_height="?attr/actionBarSize" />
 
 
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:layout_marginEnd="-65dp"
@@ -28,88 +29,64 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+            android:layout_width="250dp"
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/hide_nav"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/ic_close"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.957"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.977" />
 
-            <TextView
-                android:id="@+id/home"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Home"
-                android:clickable="true"
-                android:focusable="true"
-                android:textSize="@dimen/nav_item_text_size"
-                android:layout_marginBottom="@dimen/nav_item_bottom_margin"
-                app:layout_constraintBottom_toTopOf="@+id/profile"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+
 
             <TextView
                 android:id="@+id/profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cart"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="@dimen/nav_item_bottom_margin"
                 android:clickable="true"
                 android:focusable="true"
+                android:text="Cart"
                 android:textSize="@dimen/nav_item_text_size"
-                android:layout_marginBottom="@dimen/nav_item_bottom_margin"
                 app:layout_constraintBottom_toTopOf="@+id/ordersitem"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/ordersitem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Orders"
-                android:textSize="@dimen/nav_item_text_size"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="16dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_marginBottom="@dimen/nav_item_bottom_margin"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.501"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:text="Orders"
+                android:textSize="@dimen/nav_item_text_size"
+                app:layout_constraintBottom_toTopOf="@+id/category"
+                app:layout_constraintStart_toStartOf="parent" />
 
 
             <TextView
                 android:id="@+id/category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Category"
-                android:textSize="@dimen/nav_item_text_size"
+                android:layout_marginStart="16dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_marginTop="@dimen/nav_item_top_margin"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:text="Category"
+                android:textSize="@dimen/nav_item_text_size"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ordersitem" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/setting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Setting"
-                android:textSize="@dimen/nav_item_text_size"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="@dimen/nav_item_top_margin"
                 android:clickable="true"
                 android:focusable="true"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:text="About"
+                android:textSize="@dimen/nav_item_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/category" />
 
@@ -117,31 +94,48 @@
                 android:id="@+id/logout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Log Out"
-                android:textSize="@dimen/nav_item_text_size"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="@dimen/nav_item_top_margin"
                 android:clickable="true"
                 android:focusable="true"
 
-                android:layout_marginTop="@dimen/nav_item_top_margin"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:text="Log Out"
+                android:textSize="@dimen/nav_item_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/setting" />
 
             <TextView
+                android:id="@+id/login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:clickable="true"
-                android:id="@+id/login"
                 android:focusable="true"
-                android:text="Login"
 
+                android:text="Login"
                 android:textSize="@dimen/nav_item_text_size"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/setting" />
 
+            <ImageView
+                android:id="@+id/imageView18"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/applogo" />
 
+            <ImageView
+                android:id="@+id/imageView21"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView18"
+                app:srcCompat="@drawable/text" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

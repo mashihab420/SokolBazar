@@ -9,6 +9,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
+import com.techdevbd.sokolbazar.MysharedPreferance;
 import com.techdevbd.sokolbazar.R;
 import com.techdevbd.sokolbazar.adapter.CartAdapter;
 import com.techdevbd.sokolbazar.adapter.OrdersAdapter;
@@ -17,23 +18,30 @@ import com.techdevbd.sokolbazar.model.ModelOrderProduct;
 import com.techdevbd.sokolbazar.model.ModelOrdersRoom;
 import com.techdevbd.sokolbazar.repository.CartRepository;
 import com.techdevbd.sokolbazar.repository.OrdersRepository;
+import com.techdevbd.sokolbazar.retrofit.ApiClient;
+import com.techdevbd.sokolbazar.retrofit.ApiInterface;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class OrdersActivity extends AppCompatActivity {
-    List<ModelOrdersRoom> arrayList;
+    List<ModelOrderProduct> arrayList;
     Context context;
     RecyclerView recyclerView;
     OrdersAdapter adapter;
-    OrdersRepository repository;
-
+    ApiInterface apiInterface;
+    MysharedPreferance mysharedPreferance;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orders);
         arrayList = new ArrayList<>();
-
+        mysharedPreferance = MysharedPreferance.getPreferences(getApplicationContext());
+        apiInterface = ApiClient.getApiInterface();
         recyclerView = findViewById(R.id.recyclerView);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
@@ -41,7 +49,7 @@ public class OrdersActivity extends AppCompatActivity {
         adapter = new OrdersAdapter(arrayList,getApplicationContext());
         recyclerView.setAdapter(adapter);
 
-        repository = new OrdersRepository(getApplicationContext());
+       /* repository = new OrdersRepository(getApplicationContext());
 
         repository.getAllData().observe(this, new Observer<List<ModelOrdersRoom>>() {
             @Override
@@ -53,30 +61,26 @@ public class OrdersActivity extends AppCompatActivity {
 
 
 
+            }
+        });*/
+       String phonee = mysharedPreferance.getPhone();
 
-                /*if (modelCartRooms.size() == 0){
-                    constraintLayout.setVisibility(View.GONE);
-                    emptyimage.setVisibility(View.VISIBLE);
+        ModelOrderProduct modelOrderProduct = new ModelOrderProduct();
+        modelOrderProduct.setPhone(phonee);
+        apiInterface.getOrders(modelOrderProduct).enqueue(new Callback<List<ModelOrderProduct>>() {
+            @Override
+            public void onResponse(Call<List<ModelOrderProduct>> call, Response<List<ModelOrderProduct>> response) {
+                arrayList.clear();
+                arrayList.addAll(response.body());
+                adapter.notifyDataSetChanged();
+            }
 
-                    emptyimage.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            *//*Intent intent = new Intent(CartActivity.this, MainActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(intent);
-                            finish();*//*
-                            onBackPressed();
-                        }
-                    });
-
-                }else {
-                    constraintLayout.setVisibility(View.VISIBLE);
-                    emptyimage.setVisibility(View.GONE);
-                }*/
-
+            @Override
+            public void onFailure(Call<List<ModelOrderProduct>> call, Throwable t) {
 
             }
         });
+
     }
 
     @Override

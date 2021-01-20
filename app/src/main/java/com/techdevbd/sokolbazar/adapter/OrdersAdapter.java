@@ -15,10 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.techdevbd.sokolbazar.R;
 import com.techdevbd.sokolbazar.activity.ConfirmOrderActivity;
 import com.techdevbd.sokolbazar.activity.DeliveryActivity;
+import com.techdevbd.sokolbazar.activity.OrderDetailsActivity;
 import com.techdevbd.sokolbazar.activity.OrdersActivity;
 import com.techdevbd.sokolbazar.activity.TrackOrderActivity;
 import com.techdevbd.sokolbazar.model.ModelCartRoom;
 
+import com.techdevbd.sokolbazar.model.ModelOrderProduct;
 import com.techdevbd.sokolbazar.model.ModelOrdersRoom;
 
 import java.util.List;
@@ -28,10 +30,10 @@ import androidmads.library.qrgenearator.QRGEncoder;
 
 public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHolder> {
 
-    List<ModelOrdersRoom> orders;
+    List<ModelOrderProduct> orders;
     Context context;
 
-    public OrdersAdapter(List<ModelOrdersRoom> orders, Context context) {
+    public OrdersAdapter(List<ModelOrderProduct> orders, Context context) {
         this.orders = orders;
         this.context = context;
     }
@@ -46,12 +48,13 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.ordernumber.setText("#"+orders.get(position).getOrderNumber());
-        holder.datetime.setText(orders.get(position).getDateTime());
+        holder.ordernumber.setText("#"+orders.get(position).getInvoice_number());
+        holder.datetime.setText(orders.get(position).getEntry_time());
 
-        String orderid = orders.get(position).getOrderNumber();
+        String orderid = orders.get(position).getInvoice_number();
         String phone = orders.get(position).getPhone();
-        String deliverytype = orders.get(position).getDeliverytype();
+        String deliverytype = orders.get(position).getDelivery_type();
+        String orderotpnum = orders.get(position).getOrderOtp();
 
         String text = orderid+","+phone;
 
@@ -65,13 +68,27 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHold
             e.printStackTrace();
         }
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.truck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, TrackOrderActivity.class);
                 intent.putExtra("order_id",orderid);
                 intent.putExtra("phone",phone);
                 intent.putExtra("delivery_type",deliverytype);
+                intent.putExtra("orders_otp",orderotpnum);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, OrderDetailsActivity.class);
+                intent.putExtra("order_id",orderid);
+                //intent.putExtra("phone",phone);
+                // intent.putExtra("delivery_type",deliverytype);
+                intent.putExtra("phone",phone);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }
@@ -84,7 +101,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHold
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        ImageView qrcode;
+        ImageView qrcode,truck;
         TextView ordernumber,datetime;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -92,6 +109,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHold
             qrcode = itemView.findViewById(R.id.imageView6);
             ordernumber = itemView.findViewById(R.id.textView10);
             datetime = itemView.findViewById(R.id.textView14);
+            truck = itemView.findViewById(R.id.imageView18);
 
         }
     }

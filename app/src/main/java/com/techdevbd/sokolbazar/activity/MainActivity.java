@@ -81,10 +81,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         binding.navigationView.setNavigationItemSelectedListener(this);
 
-        binding.hideNav.setOnClickListener(this);
         binding.ordersitem.setOnClickListener(this);
         binding.category.setOnClickListener(this);
-        binding.home.setOnClickListener(this);
         binding.logout.setOnClickListener(this);
         binding.profile.setOnClickListener(this);
         binding.setting.setOnClickListener(this);
@@ -216,9 +214,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Log.d(TAG, "onClick: clicked");
         switch (v.getId()){
-            case R.id.hide_nav:
-                binding.drawerLayout.closeDrawer(GravityCompat.START);
-                break;
             case R.id.ordersitem:
                 binding.drawerLayout.closeDrawer(GravityCompat.START);
                 Intent intent = new Intent(MainActivity.this,OrdersActivity.class);
@@ -231,7 +226,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.setting:
                 binding.drawerLayout.closeDrawer(GravityCompat.START);
-                Toast.makeText(this, "Setting", Toast.LENGTH_SHORT).show();
+                intent = new Intent(MainActivity.this,AboutActivity.class);
+                startActivity(intent);
                 break;
             case R.id.category:
 

@@ -165,6 +165,11 @@ public class CartActivity extends AppCompatActivity implements OnDataSend{
 
     }
 
+    @Override
+    public void orderprice(String subtotal, String total, String discount) {
+
+    }
+
     public void confirmorderId(View view) {
 
         String name = sharedPreferance.getName();
