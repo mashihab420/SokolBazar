@@ -1,6 +1,7 @@
 package com.techdevbd.sokolbazar.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,7 +11,9 @@ import android.widget.TextView;
 
 import com.techdevbd.sokolbazar.R;
 import com.techdevbd.sokolbazar.adapter.OrderDetailsAdapter;
+import com.techdevbd.sokolbazar.model.ModelCartRoom;
 import com.techdevbd.sokolbazar.model.ModelOrderProduct;
+import com.techdevbd.sokolbazar.repository.CartRepository;
 import com.techdevbd.sokolbazar.retrofit.ApiClient;
 import com.techdevbd.sokolbazar.retrofit.ApiInterface;
 
@@ -27,6 +30,7 @@ public class OrderDetailsActivity extends AppCompatActivity implements OnDataSen
     ApiInterface apiInterface;
     OrderDetailsAdapter orderDetailsAdapter;
     List<ModelOrderProduct> productList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +43,10 @@ public class OrderDetailsActivity extends AppCompatActivity implements OnDataSen
         productList = new ArrayList<>();
         orderDetailsAdapter = new OrderDetailsAdapter(productList,getApplicationContext(),this);
         initRecyclerViewAllproduct(orderDetailsAdapter, recyclerView);
+
+
+
+
     }
     private void initRecyclerViewAllproduct(RecyclerView.Adapter adapter, RecyclerView view) {
         view.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));

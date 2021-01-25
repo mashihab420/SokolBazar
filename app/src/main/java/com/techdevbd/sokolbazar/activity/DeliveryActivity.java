@@ -125,6 +125,7 @@ public class DeliveryActivity extends AppCompatActivity {
                         arrayList.addAll(modelCartRooms);
 
                         String ordernumberselfservice = getOrderNumberGenerator();
+                        String ordersOtpnumber = getOrderOtpGenerator();
 
                         Intent intent = getIntent();
                         String subtotal = intent.getStringExtra("subtotall");
@@ -161,6 +162,7 @@ public class DeliveryActivity extends AppCompatActivity {
                             modelOrderProduct.setImage_url(modelCartRooms.get(i).getUrl());
                             modelOrderProduct.setDelivery_time(spinnertext);
                             modelOrderProduct.setDelivery_type("Home Delivery");
+                            modelOrderProduct.setOrderOtp(ordersOtpnumber);
                             modelOrderProduct.setEntry_time(formattedDate);
 
 
@@ -210,6 +212,7 @@ public class DeliveryActivity extends AppCompatActivity {
 
                          intent = new Intent(DeliveryActivity.this,ConfirmOrderActivity.class);
                         intent.putExtra("order_id",ordernumberselfservice);
+                        intent.putExtra("order_otp",ordersOtpnumber);
                         intent.putExtra("phone",phone);
                         intent.putExtra("delivery_type","Home Delivery");
                         intent.putExtra("subtotall",subtotal);
@@ -267,6 +270,7 @@ public class DeliveryActivity extends AppCompatActivity {
                         modelOrderProduct.setImage_url(modelCartRooms.get(i).getUrl());
                         modelOrderProduct.setDelivery_time("Any Time");
                         modelOrderProduct.setDelivery_type("Self Service");
+                        modelOrderProduct.setOrderOtp("");
                         modelOrderProduct.setEntry_time(formattedDate);
 
                         apiInterface.userOrderInsert(modelOrderProduct).enqueue(new Callback<ModelOrderProduct>() {
@@ -340,6 +344,16 @@ public class DeliveryActivity extends AppCompatActivity {
 
         // this will convert any number sequence into 6 character.
         return String.format("%06d", number);
+    }
+
+    public static String getOrderOtpGenerator() {
+        // It will generate 6 digit random Number.
+        // from 0 to 999999
+        Random rnd = new Random();
+        int number = rnd.nextInt(9999);
+
+        // this will convert any number sequence into 4 character.
+        return String.format("%04d", number);
     }
 
 

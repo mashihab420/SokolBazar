@@ -22,6 +22,8 @@ import com.techdevbd.sokolbazar.retrofit.ApiClient;
 import com.techdevbd.sokolbazar.retrofit.ApiInterface;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -45,7 +47,6 @@ public class OrdersActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-
         adapter = new OrdersAdapter(arrayList,getApplicationContext());
         recyclerView.setAdapter(adapter);
 

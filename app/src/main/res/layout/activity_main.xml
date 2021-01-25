@@ -71,7 +71,7 @@
                 android:layout_marginStart="16dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:text="Category"
+                android:text="Products"
                 android:textSize="@dimen/nav_item_text_size"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

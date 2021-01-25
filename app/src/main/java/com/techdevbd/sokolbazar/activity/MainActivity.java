@@ -139,6 +139,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
            }
        });
 
+      binding.category.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+              binding.drawerLayout.closeDrawer(GravityCompat.START);
+              Intent intent = new Intent(MainActivity.this,SeeAllProductActivity.class);
+              startActivity(intent);
+          }
+      });
+
         initFragmentHome();
 
 

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 
 import com.techdevbd.sokolbazar.R;
 import com.techdevbd.sokolbazar.adapter.AllProductAdapter;
@@ -72,5 +73,14 @@ public class SeeAllProductActivity extends AppCompatActivity {
 
     private void initViewModel() {
         viewModelHome = new ViewModelProvider.AndroidViewModelFactory(getApplication()).create(ViewModelHome.class);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    public void btnback(View view) {
+        onBackPressed();
     }
 }

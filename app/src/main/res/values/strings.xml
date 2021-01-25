@@ -10,6 +10,7 @@
     <string name="fb_login_protocol_scheme">fb348753663233426</string>
 
 
+
     <string-array name="pickatime">
         <item>Pick a time</item>
         <item>8:00 AM to 9:00 AM</item>
@@ -42,6 +43,8 @@
     <string name="icon6"><div>Icons made by <a href="https://www.shutterstock.com/image-photo/fresh-raw-meat-products-isolated-on-394218775" title="shutterstock">Shutterstock</a> from <a href="https://www.shutterstock.com/" title="Shutterstock">www.shutterstock.com</a></div></string>
     <string name="icon7"><div>Icons made by <a href="https://www.pinterest.com/pin/572801646358372965/" title="Pinterest">Pinterest</a> from <a href="https://www.pinterest.com/" title="Pinterest">www.pinterest.com</a></div></string>
     <string name="icon8"><div>Icons made by <a href="https://chefcart.com.bd/" title="Chefcart">Chefcart</a> from <a href="https://chefcart.com.bd/" title="Chefcart">www.chefcart.com.bd</a></div></string>
-    <string name="icon9"><div>Icons made by <a href="https://esodai.com.bd/" title="Esodai">Esodai</a> from <a href="https://esodai.com.bd/" title="Esodai">www.esodai.com.bd/</a></div></string>
+    <string name="icon9"><div>Icons made by <a href="https://esodai.com.bd/" title="Esodai">Esodai</a> from <a href="https://esodai.com.bd/" title="Esodai">www.esodai.com.bd</a></div></string>
+    <string name="icon10"><div>Icons made by <a href="https://www.flaticon.com/authors/nhor-phai" title="Nhor Phai">Nhor Phai</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div></string>
+    <string name="icon11"><div>Icons made by <a href="https://dreamstime.com/" title="Irynaalex">Esodai</a> from <a href="https://dreamstime.com/" title="Irynaalex">www.dreamstime.com</a></div></string>
 
 </resources>

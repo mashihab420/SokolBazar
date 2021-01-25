@@ -1,27 +1,33 @@
 package com.techdevbd.sokolbazar.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.techdevbd.sokolbazar.R;
 import com.techdevbd.sokolbazar.databinding.ActivityProductDetailsBinding;
 import com.techdevbd.sokolbazar.model.ModelCartRoom;
 import com.techdevbd.sokolbazar.repository.CartRepository;
 
+import java.util.List;
+
 public class ProductDetails extends AppCompatActivity {
 
     ActivityProductDetailsBinding binding;
-
+    CartRepository repository;
+    TextView cartQuantity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityProductDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         //setContentView(R.layout.activity_product_details);
-
+        cartQuantity = findViewById(R.id.cart_quantity_id);
         Intent intent = getIntent();
         String name = intent.getStringExtra("pname");
         String price = intent.getStringExtra("pprice");
@@ -105,6 +111,30 @@ public class ProductDetails extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+
+        repository = new CartRepository(this);
+        repository.getAllData().observe(this, new Observer<List<ModelCartRoom>>() {
+            @Override
+            public void onChanged(List<ModelCartRoom> modelCartRooms) {
+
+                if (modelCartRooms.size()==0){
+                    cartQuantity.setVisibility(View.GONE);
+                }else {
+                    cartQuantity.setVisibility(View.VISIBLE);
+                    if(modelCartRooms.size()>99){
+                        cartQuantity.setText("99+");
+                    }else {
+                        cartQuantity.setText(""+modelCartRooms.size());
+                    }
+
+
+                }
+
+            }
+        });
+
 
     }
 }

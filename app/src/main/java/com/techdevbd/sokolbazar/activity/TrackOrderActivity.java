@@ -33,7 +33,7 @@ import retrofit2.Response;
 
 public class TrackOrderActivity extends AppCompatActivity {
     ImageView imageView;
-    TextView ordernumber;
+    TextView ordernumber, readytopick, readytopickd_details, qrinvoiceid;
     ApiInterface apiInterface;
     SwipeRefreshLayout swipeRefreshLayout;
     ActivityTrackOrderBinding binding;
@@ -49,28 +49,64 @@ public class TrackOrderActivity extends AppCompatActivity {
 
         swipeRefreshLayout = findViewById(R.id.sqipeRefreshId);
         imageView = findViewById(R.id.imageView);
+        readytopick = findViewById(R.id.textView37);
+        readytopickd_details = findViewById(R.id.textView41);
         ordernumber = findViewById(R.id.ordernumber_id);
+        qrinvoiceid = findViewById(R.id.invoiceid);
         apiInterface = ApiClient.getApiInterface();
         Intent intent = getIntent();
-         orderid = intent.getStringExtra("order_id");
+        orderid = intent.getStringExtra("order_id");
         String phone = intent.getStringExtra("phone");
         String deliverytype = intent.getStringExtra("delivery_type");
+        String orderotpnum = intent.getStringExtra("orders_otp");
 
         ordernumber.setText("#" + orderid);
 
-        String text = orderid + "," + phone;
+        //   String text = orderid + "," + phone;
 
-        QRGEncoder qrgEncoder = new QRGEncoder(text, null, QRGContents.Type.TEXT, 500);
+       /* QRGEncoder qrgEncoder = new QRGEncoder(text, null, QRGContents.Type.TEXT, 500);
         try {
             Bitmap qrbits = qrgEncoder.getBitmap();
             imageView.setImageBitmap(qrbits);
 
         } catch (Exception e) {
             e.printStackTrace();
+        }*/
+
+        if (deliverytype.equals("Home Delivery")) {
+            ordernumber.setText("Order OTP#" + orderotpnum);
+            readytopick.setText("Ready to Delivered");
+            readytopickd_details.setText("Your order is ready for Delivered.");
+            String text = orderotpnum;
+            qrinvoiceid.setText("Order OTP #"+text);
+            QRGEncoder qrgEncoder = new QRGEncoder(text, null, QRGContents.Type.TEXT, 500);
+            try {
+                Bitmap qrbits = qrgEncoder.getBitmap();
+                imageView.setImageBitmap(qrbits);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            ordernumber.setText("Order Number#" + orderid);
+            readytopick.setText("Ready to Pickup");
+            readytopickd_details.setText("Your order is ready for pickup.");
+
+            String text = orderid + "," + phone;
+            qrinvoiceid.setText("Order Number #"+orderid);
+            QRGEncoder qrgEncoder = new QRGEncoder(text, null, QRGContents.Type.TEXT, 500);
+            try {
+                Bitmap qrbits = qrgEncoder.getBitmap();
+                imageView.setImageBitmap(qrbits);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
-       getData();
-        
+
+        getData();
+
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -116,9 +152,7 @@ public class TrackOrderActivity extends AppCompatActivity {
                     binding.textView40.setTextColor(Color.parseColor("#1C5F95"));
 
 
-                }
-
-              else if (status.equals("preparing")) {
+                } else if (status.equals("preparing")) {
 
                     binding.imageCircleGreen2.setVisibility(View.VISIBLE);
                     binding.imageLineGreen2.setVisibility(View.VISIBLE);
@@ -137,9 +171,7 @@ public class TrackOrderActivity extends AppCompatActivity {
                     binding.textView41.setTextColor(Color.parseColor("#1C5F95"));
 
 
-                }
-
-               else if (status.equals("ready")) {
+                } else if (status.equals("ready")) {
 
                     binding.imageCircleGreen2.setVisibility(View.VISIBLE);
                     binding.imageLineGreen2.setVisibility(View.VISIBLE);
@@ -158,9 +190,7 @@ public class TrackOrderActivity extends AppCompatActivity {
                     binding.textView41.setTextColor(Color.parseColor("#FE6268"));
 
 
-                }
-
-                else if (status.equals("delivered")) {
+                } else if (status.equals("delivered")) {
 
                     binding.imageCircleGreen2.setVisibility(View.VISIBLE);
                     binding.imageLineGreen2.setVisibility(View.VISIBLE);
@@ -178,7 +208,7 @@ public class TrackOrderActivity extends AppCompatActivity {
                     binding.textView37.setTextColor(Color.parseColor("#FE6268"));
                     binding.textView41.setTextColor(Color.parseColor("#FE6268"));
 
-                    binding.textView32.setText("Order Delivered");
+                    // binding.textView32.setText("Order Delivered");
 
 
                 }
